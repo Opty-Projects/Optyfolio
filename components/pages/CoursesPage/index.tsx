@@ -5,7 +5,7 @@ import {
   ArrowUpward,
   CalendarMonth,
   Category,
-  Star,
+  MilitaryTech,
 } from '@mui/icons-material'
 import {
   capitalize,
@@ -113,7 +113,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
               title={grouping === 'score' ? sortTooltip : 'Group by score'}
             >
               <div className={classes.toggleButtonContent}>
-                <Star />
+                <MilitaryTech />
                 {grouping === 'score' && sortArrow}
               </div>
             </Tooltip>
@@ -128,55 +128,60 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
             </Typography>
             <Typography className={classes.title}>{group}</Typography>
           </Grid>
-          {courses.map(
-            ({ name, href, score, credits, period, links, branch }) => (
-              <Grid key={name} item xs={12} md={6}>
-                <Card>
-                  <div>
-                    <Link
-                      className={classes.title}
-                      href={href}
-                      target="_blank"
-                      underline="hover"
-                    >
-                      {name}
-                    </Link>
-                    {grouping !== 'period' && (
+          {courses.map(({ name, href, score, period, links, branch }) => (
+            <Grid key={name} item xs={12} md={6}>
+              <Card>
+                <div>
+                  <Link
+                    className={classes.title}
+                    href={href}
+                    target="_blank"
+                    underline="hover"
+                  >
+                    {name}
+                  </Link>
+                  {grouping !== 'period' && (
+                    <div className={classes.section}>
+                      <CalendarMonth className={classes.mediumLabel} />
                       <Typography className={classes.smallLabel}>
                         {period}
                       </Typography>
-                    )}
-                    {grouping !== 'branch' && (
+                    </div>
+                  )}
+                  {grouping !== 'branch' && (
+                    <div className={classes.section}>
+                      <Category className={classes.mediumLabel} />
                       <Typography className={classes.smallLabel}>
                         {branch}
                       </Typography>
-                    )}
-                  </div>
-                  <div className={classes.section}>
-                    {links?.length ? (
-                      <div className={classes.links}>
-                        {links.map(({ href, Icon, color, tooltip }) => (
-                          <Tooltip key={href} title={tooltip}>
-                            <IconButton href={href} target="_blank">
-                              <Icon
-                                color={color || theme.palette.text.primary}
-                              />
-                            </IconButton>
-                          </Tooltip>
-                        ))}
-                      </div>
-                    ) : null}
-                    <div className={classes.score}>
-                      <Typography className={classes.value}>{score}</Typography>
+                    </div>
+                  )}
+                </div>
+                <div className={classes.section}>
+                  {links?.length ? (
+                    <div className={classes.links}>
+                      {links.map(({ href, Icon, color, tooltip }) => (
+                        <Tooltip key={href} title={tooltip}>
+                          <IconButton href={href} target="_blank">
+                            <Icon color={color || theme.palette.text.primary} />
+                          </IconButton>
+                        </Tooltip>
+                      ))}
+                    </div>
+                  ) : null}
+                  <div className={classes.score}>
+                    <Typography className={classes.value}>{score}</Typography>
+                    <div className={classes.section}>
+                      <MilitaryTech className={classes.mediumLabel} />
                       <Typography className={classes.smallLabel}>
                         Score
                       </Typography>
                     </div>
                   </div>
-                </Card>
-              </Grid>
-            )
-          )}
+                </div>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
       ))}
     </>

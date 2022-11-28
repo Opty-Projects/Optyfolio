@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.spacing(1),
+    gap: theme.spacing(1 / 2),
   },
   links: {
     display: 'flex',

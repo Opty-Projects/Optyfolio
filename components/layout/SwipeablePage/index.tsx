@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react'
+import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 import { Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/styles'
@@ -11,26 +11,30 @@ import { useStyles } from './styles'
 export const pages: {
   hash: string
   name: string
-  Component: FC
+  node: ReactNode
 }[] = [
-  { hash: '#about', name: 'About', Component: About },
+  { hash: '#about', name: 'About', node: <About /> },
   {
     hash: '#bsc',
     name: "Bachelor's",
-    Component: CoursesPage.bind(null, {
-      degree: "Bachelor's",
-      period: 'September 2017 - June 2020',
-      courses: bscCourses,
-    }),
+    node: (
+      <CoursesPage
+        degree="Bachelor's"
+        period="September 2017 - June 2020"
+        courses={bscCourses}
+      />
+    ),
   },
   {
     hash: '#msc',
     name: "Master's",
-    Component: CoursesPage.bind(null, {
-      degree: "Master's",
-      period: 'September 2020 - November 2022',
-      courses: mscCourses,
-    }),
+    node: (
+      <CoursesPage
+        degree="Master's"
+        period="September 2020 - November 2022"
+        courses={mscCourses}
+      />
+    ),
   },
 ]
 
@@ -74,14 +78,14 @@ const SwipeablePage: FC = () => {
         index={page}
         onChangeIndex={changePage}
       >
-        {pages.map(({ Component }, index) => (
+        {pages.map(({ node }, index) => (
           <TabPanel
             key={`tab-component-${index}`}
             index={index}
             value={page}
             dir={theme.direction}
           >
-            <Component />
+            {node}
           </TabPanel>
         ))}
       </SwipeableViews>
