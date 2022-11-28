@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     fontSize: 'large',
     fontWeight: 400,
-    color: theme.palette.text.primary,
+    color: theme.palette.text.secondary,
   },
   swipeableView: {
     position: 'absolute',
@@ -23,7 +23,6 @@ export const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     right: 0,
-    padding: theme.spacing(3),
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
   },
 }))
