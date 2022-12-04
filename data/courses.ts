@@ -399,10 +399,10 @@ export const mscCourses: Course[] = [
         tooltip: 'Extended abstract Overleaf project',
       },
       {
-        href: 'https://youtu.be/cz-1ctWDVGU',
+        href: 'https://youtu.be/g6Qp26nNgQk',
         Icon: SiYoutube,
         color: '#f44336',
-        tooltip: 'Presentation video',
+        tooltip: 'IEEE NCA 2022 presentation',
       },
     ],
     branch: 'Dissertation',

@@ -8,21 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     gap: theme.spacing(3),
   },
-  section: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing(1 / 2),
-  },
-  title: {
-    fontWeight: 400,
-    fontSize: 'xx-large',
-  },
-  icon: {
-    fontWeight: 400,
-    fontSize: 'x-large',
-    color: theme.palette.primary.main,
-  },
   avatar: {
     width: 200,
     height: 200,
@@ -31,22 +16,49 @@ export const useStyles = makeStyles((theme) => ({
       transform: 'scale(1.1)',
     },
   },
-  tagCloud: {
-    maxWidth: 610,
-    textAlign: 'center',
-    cursor: 'default',
+  section: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing(1),
   },
-  tag: {
+  grid: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing(3),
+  },
+  title: {
+    fontWeight: 400,
+    fontSize: 'large',
     color: theme.palette.text.primary,
-    display: 'inline-block',
-    margin: 4,
-    '&:hover': {
-      transition: 'all 0.2s ease-in-out',
-      transform: 'scale(1.1)',
-    },
   },
-  card: {
-    width: 'fit-content',
+  icon: {
+    fontWeight: 400,
+    fontSize: 'large',
+  },
+  value: {
+    fontWeight: 400,
+    fontSize: 'medium',
+    color: theme.palette.text.secondary,
+  },
+  skillCard: {
+    height: '100%',
     flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    gap: theme.spacing(2),
+  },
+  skill: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(1),
+  },
+  progress: {
+    width: '100%',
+    borderRadius: theme.shape.borderRadius,
   },
 }))
