@@ -2,9 +2,10 @@ import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 import { Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/styles'
-import { bscCourses, mscCourses } from '../../../data'
+import { bscCourses, mscCourses } from '../../../data/courses'
 import About from '../../pages/About'
 import CoursesPage from '../../pages/CoursesPage'
+import Card from '../../shared/Card'
 import TabPanel from '../../shared/TabPanel'
 import { useStyles } from './styles'
 
@@ -54,8 +55,8 @@ const SwipeablePage: FC = () => {
   }, [])
 
   return (
-    <>
-      <div className={classes.appBarContainer}>
+    <div className={classes.container}>
+      <Card className={classes.appBarContainer}>
         <Tabs
           value={page}
           onChange={(_, page) => changePage(page)}
@@ -71,7 +72,7 @@ const SwipeablePage: FC = () => {
             />
           ))}
         </Tabs>
-      </div>
+      </Card>
       <SwipeableViews
         className={classes.swipeableView}
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -89,7 +90,7 @@ const SwipeablePage: FC = () => {
           </TabPanel>
         ))}
       </SwipeableViews>
-    </>
+    </div>
   )
 }
 

@@ -3,7 +3,7 @@ import { FC, useMemo, useState } from 'react'
 import {
   ArrowDownward,
   ArrowUpward,
-  CalendarMonth,
+  CalendarToday,
   Category,
   MilitaryTech,
 } from '@mui/icons-material'
@@ -18,7 +18,8 @@ import {
   Typography,
   useTheme,
 } from '@mui/material'
-import { Course, getCoursesWeightedAvg } from '../../../data'
+import { Course } from '../../../data/courses'
+import { getCoursesWeightedAvg } from '../../../utils/courses'
 import Card from '../../shared/Card'
 import { useStyles } from './styles'
 
@@ -93,7 +94,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
               title={grouping === 'period' ? sortTooltip : 'Group by period'}
             >
               <div className={classes.toggleButtonContent}>
-                <CalendarMonth />
+                <CalendarToday />
                 {grouping === 'period' && sortArrow}
               </div>
             </Tooltip>
@@ -142,7 +143,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                   </Link>
                   {grouping !== 'period' && (
                     <div className={classes.section}>
-                      <CalendarMonth className={classes.mediumLabel} />
+                      <CalendarToday className={classes.mediumLabel} />
                       <Typography className={classes.smallLabel}>
                         {period}
                       </Typography>

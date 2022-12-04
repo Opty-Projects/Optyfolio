@@ -1,15 +1,17 @@
 import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles((theme) => ({
-  appBarContainer: {
+  container: {
     width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
+    height: '100%',
+    backgroundColor: theme.palette.background.default,
+  },
+  appBarContainer: {
     position: 'sticky',
     top: 0,
     zIndex: 1,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[3],
+    justifyContent: 'center',
+    padding: 0,
   },
   tab: {
     textTransform: 'none',
@@ -18,11 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   swipeableView: {
-    position: 'absolute',
-    top: theme.spacing(6),
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: theme.palette.background.default,
+    width: '100%',
+    height: '100%',
   },
 }))

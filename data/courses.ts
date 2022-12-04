@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons'
-import { SiDropbox, SiGithub, SiOverleaf, SiYoutube } from 'react-icons/si'
+import { SiGithub, SiOverleaf, SiYoutube } from 'react-icons/si'
 
 export interface Course {
   name: string
@@ -387,18 +387,6 @@ export const mscCourses: Course[] = [
     period: '2nd year, 2nd semester',
     links: [
       {
-        href: 'https://www.dropbox.com/s/inyxf2on7lgiie3/MasterThesis.pdf?dl=0',
-        Icon: SiDropbox,
-        color: '#2196f3',
-        tooltip: 'Dissertation PDF document',
-      },
-      {
-        href: 'https://www.dropbox.com/s/g9d0rqe61nt5od4/MasterExtendedAbstract.pdf?dl=0',
-        Icon: SiDropbox,
-        color: '#2196f3',
-        tooltip: 'Article PDF document',
-      },
-      {
         href: 'https://www.overleaf.com/read/jfznmjdwfjjv',
         Icon: SiOverleaf,
         color: '#4caf50',
@@ -408,19 +396,13 @@ export const mscCourses: Course[] = [
         href: 'https://www.overleaf.com/read/xkgjbxpmkjbm',
         Icon: SiOverleaf,
         color: '#4caf50',
-        tooltip: 'Article Overleaf project',
+        tooltip: 'Extended abstract Overleaf project',
       },
       {
         href: 'https://youtu.be/cz-1ctWDVGU',
         Icon: SiYoutube,
         color: '#f44336',
         tooltip: 'Presentation video',
-      },
-      {
-        href: 'https://youtu.be/-Ev1JLfb7W0',
-        Icon: SiYoutube,
-        color: '#f44336',
-        tooltip: 'App demo',
       },
     ],
     branch: 'Dissertation',
@@ -433,22 +415,10 @@ export const mscCourses: Course[] = [
     period: '2nd year, 1st semester',
     links: [
       {
-        href: 'https://www.dropbox.com/s/mm1rawv7zqgyavp/MasterDissertationProject.pdf?dl=0',
-        Icon: SiDropbox,
-        color: '#2196f3',
-        tooltip: 'PDF document',
-      },
-      {
         href: 'https://www.overleaf.com/read/hsgrgwmcmhnr',
         Icon: SiOverleaf,
         color: '#4caf50',
         tooltip: 'Overleaf project',
-      },
-      {
-        href: 'https://youtu.be/VKfyhT1Y0iI',
-        Icon: SiYoutube,
-        color: '#f44336',
-        tooltip: 'Presentation video',
       },
     ],
     branch: 'Dissertation',
@@ -642,15 +612,3 @@ export const mscCourses: Course[] = [
     branch: 'Common Branch',
   },
 ]
-
-export const getCoursesWeightedAvg = (courseList: Course[]) => {
-  const [sum, credits] = courseList.reduce(
-    (acc, { score, credits }) => {
-      acc[0] += score * credits
-      acc[1] += credits
-      return acc
-    },
-    [0, 0]
-  )
-  return sum / credits
-}
