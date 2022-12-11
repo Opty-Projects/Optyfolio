@@ -11,10 +11,10 @@ const AnimatedSentence: FC<AnimatedSentenceProps> = ({ sentence }) => {
 
   return (
     <div className={classes.sentence}>
-      {sentence.split(' ').map((word) => (
-        <div className={classes.word}>
+      {sentence.split(' ').map((word, index) => (
+        <div key={`word-${index}`} className={classes.word}>
           {word.split('').map((char, index) => (
-            <AnimatedChar char={char} index={index} />
+            <AnimatedChar key={`char-${index}`} char={char} index={index} />
           ))}
         </div>
       ))}

@@ -72,9 +72,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
             <Typography className={classes.value}>
               {coursesWeightedAvg.toFixed(1)}
             </Typography>
-            <Typography className={classes.smallLabel}>
-              Weighted Average
-            </Typography>
+            <Typography className={classes.smallLabel}>GPA</Typography>
           </Grid>
         </Grid>
       </Card>
@@ -122,7 +120,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
         </ToggleButtonGroup>
       </div>
       {groupedCourses?.map(([group, courses]) => (
-        <Grid key={group} container spacing={2}>
+        <Grid key={`${grouping}-${group}`} container spacing={2}>
           <Grid className={classes.section} item xs={12}>
             <Typography className={classes.mediumLabel}>
               {capitalize(grouping)}:
@@ -130,7 +128,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
             <Typography className={classes.title}>{group}</Typography>
           </Grid>
           {courses.map(({ name, href, score, period, links, branch }) => (
-            <Grid key={name} item xs={12} md={6}>
+            <Grid key={`${grouping}-${group}-${name}`} item xs={12} md={6}>
               <Card>
                 <div>
                   <Link
@@ -162,7 +160,10 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                   {links?.length ? (
                     <div className={classes.links}>
                       {links.map(({ href, Icon, color, tooltip }) => (
-                        <Tooltip key={href} title={tooltip}>
+                        <Tooltip
+                          key={`${grouping}-${group}-${name}-${href}`}
+                          title={tooltip}
+                        >
                           <IconButton href={href} target="_blank">
                             <Icon color={color || theme.palette.text.primary} />
                           </IconButton>

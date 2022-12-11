@@ -63,9 +63,9 @@ const SwipeablePage: FC = () => {
           textColor="primary"
           variant="scrollable"
         >
-          {pages.map(({ name }, index) => (
+          {pages.map(({ hash, name }, index) => (
             <Tab
-              key={`tab-${index}`}
+              key={`tab-${hash}`}
               className={classes.tab}
               label={name}
               value={index}
@@ -79,9 +79,9 @@ const SwipeablePage: FC = () => {
         index={page}
         onChangeIndex={changePage}
       >
-        {pages.map(({ node }, index) => (
+        {pages.map(({ hash, node }, index) => (
           <TabPanel
-            key={`tab-component-${index}`}
+            key={`tab-panel-${hash}`}
             index={index}
             value={page}
             dir={theme.direction}

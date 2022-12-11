@@ -10,6 +10,7 @@ import {
 import { skills } from '../../../data/skills'
 import AnimatedSentence from '../../shared/AnimatedSentence'
 import Card from '../../shared/Card'
+import ExperienceTimeline from './ExperienceTimeline'
 import { useStyles } from './styles'
 
 const introductorySentence = "Hi! I'm Ricardo, Software Engineer"
@@ -21,21 +22,29 @@ const About: FC = () => {
     <div className={classes.container}>
       <div className={classes.grid}>
         <Avatar className={classes.avatar}>
-          <Image src="/Avatar.jpg" layout="fill" />
+          <Image
+            src="/avatar.jpg"
+            alt="avatar"
+            layout="fill"
+            objectFit="cover"
+          />
         </Avatar>
         <AnimatedSentence sentence={introductorySentence} />
       </div>
 
+      <AnimatedSentence sentence="Experience" />
+      <ExperienceTimeline />
+
       <AnimatedSentence sentence="Skills" />
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {Object.entries(skills).map(([group, skills]) => (
-          <Grid key={group} item xs={12} sm={6} md={3}>
+          <Grid key={`skill-group-${group}`} item xs={12} sm={6} md={3}>
             <Card className={classes.skillCard}>
               <Typography className={classes.title}>{group}</Typography>
               {skills.map(({ name, Icon, color, level }) => {
                 const skillColor = color || theme.palette.primary.contrastText
                 return (
-                  <div key={name} className={classes.skill}>
+                  <div key={`skill-${name}`} className={classes.skill}>
                     <div className={classes.section}>
                       {Icon && (
                         <Icon className={classes.icon} color={skillColor} />

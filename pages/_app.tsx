@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Optyfolio</title>
         <meta name="description" content="Ricardo Grade's portfolio" />
-        <link rel="icon" href="/Portfolio.png" />
+        <link rel="icon" href="/portfolio.png" />
       </Head>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
