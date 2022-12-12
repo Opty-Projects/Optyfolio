@@ -7,7 +7,6 @@ const getDesignTokens = (mode: PaletteMode) =>
       ...(mode === 'light' && {
         primary: {
           main: '#1565c0',
-          contrastText: '#000000',
         },
         secondary: {
           main: '#c62828',
@@ -19,7 +18,6 @@ const getDesignTokens = (mode: PaletteMode) =>
       ...(mode === 'dark' && {
         primary: {
           main: '#f9a825',
-          contrastText: '#ffffff',
         },
         secondary: {
           main: '#f44336',

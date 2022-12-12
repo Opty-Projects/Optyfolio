@@ -3,6 +3,7 @@ import { FC } from 'react'
 import {
   Avatar,
   Grid,
+  Icon,
   LinearProgress,
   Typography,
   useTheme,

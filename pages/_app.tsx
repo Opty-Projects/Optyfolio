@@ -1,17 +1,17 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useMemo } from 'react'
-import { CssBaseline, useMediaQuery } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 import {
   createTheme,
   StyledEngineProvider,
   ThemeProvider,
 } from '@mui/material/styles'
+import MessagingAction from '../components/messaging/MessagingAction'
 import getDesignTokens from '../styles/getDesignTokens'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const mode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light'
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode])
+  const theme = useMemo(() => createTheme(getDesignTokens('dark')), [])
 
   return (
     <>
@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Component {...pageProps} />
+          <MessagingAction />
         </ThemeProvider>
       </StyledEngineProvider>
     </>
