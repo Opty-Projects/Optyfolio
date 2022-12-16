@@ -387,6 +387,11 @@ export const mscCourses: Course[] = [
     period: '2nd year, 2nd semester',
     links: [
       {
+        href: 'https://github.com/surething-project/CROSSCityApp',
+        Icon: SiGithub,
+        tooltip: 'GitHub source code repository',
+      },
+      {
         href: 'https://www.overleaf.com/read/jfznmjdwfjjv',
         Icon: SiOverleaf,
         color: '#4caf50',

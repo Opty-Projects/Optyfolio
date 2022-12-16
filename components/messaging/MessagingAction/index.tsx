@@ -1,23 +1,17 @@
 import { FC, useState } from 'react'
 import { Message } from '@mui/icons-material'
-import { Fab } from '@mui/material'
 import AnimatedModal from '../../shared/AnimatedModal'
 import MessageMeForm from '../MessageMeForm'
-import { useStyles } from './styles'
+import { MessagingFab } from './styles'
 
 const MessagingAction: FC = () => {
-  const classes = useStyles()
   const [openMessageMeModal, setOpenMessageMeModal] = useState(false)
 
   return (
     <>
-      <Fab
-        className={classes.fab}
-        onClick={() => setOpenMessageMeModal(true)}
-        color="primary"
-      >
+      <MessagingFab onClick={() => setOpenMessageMeModal(true)} color="primary">
         <Message />
-      </Fab>
+      </MessagingFab>
       <AnimatedModal
         open={openMessageMeModal}
         onClose={() => setOpenMessageMeModal(false)}

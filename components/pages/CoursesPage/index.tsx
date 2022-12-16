@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash'
+import { groupBy, isEmpty } from 'lodash'
 import { FC, useMemo, useState } from 'react'
 import {
   ArrowDownward,
@@ -21,7 +21,12 @@ import {
 import { Course } from '../../../data/courses'
 import { getCoursesWeightedAvg } from '../../../utils/courses'
 import Card from '../../shared/Card'
-import { useStyles } from './styles'
+import {
+  CourseLinksContainer,
+  CourseScoreContainer,
+  CourseSection,
+  ToggleButtonContent,
+} from './styles'
 
 export interface CoursesPageProps {
   degree: string
@@ -30,7 +35,6 @@ export interface CoursesPageProps {
 }
 
 const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
-  const classes = useStyles()
   const theme = useTheme()
   const [grouping, setGrouping] = useState<'period' | 'branch' | 'score'>(
     'period'
@@ -56,7 +60,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
       <Card>
         <Grid container spacing={2}>
           <Grid item xs={12} md={8}>
-            <Typography className={classes.title}>
+            <Typography>
               Bologna {degree} Degree in Computer Science &amp; Engineering @{' '}
               <Link
                 href="https://tecnico.ulisboa.pt/"
@@ -66,18 +70,24 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                 Instituto Superior Técnico
               </Link>
             </Typography>
-            <Typography className={classes.smallLabel}>{period}</Typography>
-          </Grid>
-          <Grid className={classes.score} item xs={12} md={4}>
-            <Typography className={classes.value}>
-              {coursesWeightedAvg.toFixed(1)}
+            <Typography fontSize="small" color="textSecondary">
+              {period}
             </Typography>
-            <Typography className={classes.smallLabel}>GPA</Typography>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <CourseScoreContainer>
+              <Typography fontSize="large" fontWeight={600}>
+                {coursesWeightedAvg.toFixed(1)}
+              </Typography>
+              <Typography fontSize="small" color="textSecondary">
+                GPA
+              </Typography>
+            </CourseScoreContainer>
           </Grid>
         </Grid>
       </Card>
-      <div className={classes.section}>
-        <Typography className={classes.mediumLabel}>Group by:</Typography>
+      <CourseSection>
+        <Typography color="textSecondary">Group by:</Typography>
         <ToggleButtonGroup
           value={grouping}
           onChange={(_, grouping) => {
@@ -91,75 +101,76 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
             <Tooltip
               title={grouping === 'period' ? sortTooltip : 'Group by period'}
             >
-              <div className={classes.toggleButtonContent}>
+              <ToggleButtonContent>
                 <CalendarToday />
                 {grouping === 'period' && sortArrow}
-              </div>
+              </ToggleButtonContent>
             </Tooltip>
           </ToggleButton>
           <ToggleButton value="branch">
             <Tooltip
               title={grouping === 'branch' ? sortTooltip : 'Group by branch'}
             >
-              <div className={classes.toggleButtonContent}>
+              <ToggleButtonContent>
                 <Category />
                 {grouping === 'branch' && sortArrow}
-              </div>
+              </ToggleButtonContent>
             </Tooltip>
           </ToggleButton>
           <ToggleButton value="score">
             <Tooltip
               title={grouping === 'score' ? sortTooltip : 'Group by score'}
             >
-              <div className={classes.toggleButtonContent}>
+              <ToggleButtonContent>
                 <MilitaryTech />
                 {grouping === 'score' && sortArrow}
-              </div>
+              </ToggleButtonContent>
             </Tooltip>
           </ToggleButton>
         </ToggleButtonGroup>
-      </div>
+      </CourseSection>
       {groupedCourses?.map(([group, courses]) => (
         <Grid key={`${grouping}-${group}`} container spacing={2}>
-          <Grid className={classes.section} item xs={12}>
-            <Typography className={classes.mediumLabel}>
-              {capitalize(grouping)}:
-            </Typography>
-            <Typography className={classes.title}>{group}</Typography>
+          <Grid item xs={12}>
+            <CourseSection>
+              <Typography color="textSecondary">
+                {capitalize(grouping)}:
+              </Typography>
+              <Typography>{group}</Typography>
+            </CourseSection>
           </Grid>
           {courses.map(({ name, href, score, period, links, branch }) => (
             <Grid key={`${grouping}-${group}-${name}`} item xs={12} md={6}>
               <Card>
                 <div>
-                  <Link
-                    className={classes.title}
-                    href={href}
-                    target="_blank"
-                    underline="hover"
-                  >
+                  <Link href={href} target="_blank" underline="hover">
                     {name}
                   </Link>
                   {grouping !== 'period' && (
-                    <div className={classes.section}>
-                      <CalendarToday className={classes.mediumLabel} />
-                      <Typography className={classes.smallLabel}>
+                    <CourseSection>
+                      <CalendarToday
+                        sx={{ fontSize: 'medium', color: 'text.secondary' }}
+                      />
+                      <Typography fontSize="small" color="textSecondary">
                         {period}
                       </Typography>
-                    </div>
+                    </CourseSection>
                   )}
                   {grouping !== 'branch' && (
-                    <div className={classes.section}>
-                      <Category className={classes.mediumLabel} />
-                      <Typography className={classes.smallLabel}>
+                    <CourseSection>
+                      <Category
+                        sx={{ fontSize: 'medium', color: 'text.secondary' }}
+                      />
+                      <Typography fontSize="small" color="textSecondary">
                         {branch}
                       </Typography>
-                    </div>
+                    </CourseSection>
                   )}
                 </div>
-                <div className={classes.section}>
-                  {links?.length ? (
-                    <div className={classes.links}>
-                      {links.map(({ href, Icon, color, tooltip }) => (
+                <CourseSection>
+                  {!isEmpty(links) && (
+                    <CourseLinksContainer>
+                      {links!.map(({ href, Icon, color, tooltip }) => (
                         <Tooltip
                           key={`${grouping}-${group}-${name}-${href}`}
                           title={tooltip}
@@ -169,18 +180,22 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                           </IconButton>
                         </Tooltip>
                       ))}
-                    </div>
-                  ) : null}
-                  <div className={classes.score}>
-                    <Typography className={classes.value}>{score}</Typography>
-                    <div className={classes.section}>
-                      <MilitaryTech className={classes.mediumLabel} />
-                      <Typography className={classes.smallLabel}>
+                    </CourseLinksContainer>
+                  )}
+                  <CourseScoreContainer>
+                    <Typography fontSize="large" fontWeight={600}>
+                      {score}
+                    </Typography>
+                    <CourseSection>
+                      <MilitaryTech
+                        sx={{ fontSize: 'medium', color: 'text.secondary' }}
+                      />
+                      <Typography fontSize="small" color="textSecondary">
                         Score
                       </Typography>
-                    </div>
-                  </div>
-                </div>
+                    </CourseSection>
+                  </CourseScoreContainer>
+                </CourseSection>
               </Card>
             </Grid>
           ))}

@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react'
 import { Slide } from '@mui/material'
-import { useStyles } from './styles'
+import { AnimatedCharSpan, CharSpan, OuterCharSpan } from './styles'
 
 export interface AnimatedCharProps {
   char: string
@@ -8,30 +8,20 @@ export interface AnimatedCharProps {
 }
 
 const AnimatedChar: FC<AnimatedCharProps> = ({ char, index }) => {
-  const classes = useStyles()
   const animatedCharRef = useRef<HTMLSpanElement>(null)
 
-  const startAnimation = () =>
-    animatedCharRef.current?.classList.add(classes.animatedCharActive)
+  const startAnimation = () => animatedCharRef.current?.classList.add('active')
   const stopAnimation = () =>
-    animatedCharRef.current?.classList.remove(classes.animatedCharActive)
+    animatedCharRef.current?.classList.remove('active')
 
   return (
     <Slide in direction="up" timeout={300 + index * 50}>
-      <span
-        className={classes.outerChar}
-        onMouseEnter={startAnimation}
-        onMouseLeave={stopAnimation}
-      >
-        <span className={classes.char}>{char}</span>
-        <span
-          ref={animatedCharRef}
-          className={classes.animatedChar}
-          onAnimationEnd={stopAnimation}
-        >
+      <OuterCharSpan onMouseEnter={startAnimation} onMouseLeave={stopAnimation}>
+        <CharSpan>{char}</CharSpan>
+        <AnimatedCharSpan ref={animatedCharRef} onAnimationEnd={stopAnimation}>
           {char}
-        </span>
-      </span>
+        </AnimatedCharSpan>
+      </OuterCharSpan>
     </Slide>
   )
 }

@@ -29,6 +29,8 @@ const getDesignTokens = (mode: PaletteMode) =>
     },
     typography: {
       fontFamily: ['Open Sans', 'sans-serif'].join(','),
+      fontWeight: 400,
+      fontSize: 14,
     },
   } as ThemeOptions)
 

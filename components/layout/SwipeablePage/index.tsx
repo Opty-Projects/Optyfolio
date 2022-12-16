@@ -1,13 +1,10 @@
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react'
-import SwipeableViews from 'react-swipeable-views'
-import { Tab, Tabs } from '@mui/material'
-import { useTheme } from '@mui/styles'
+import { Tabs, useTheme } from '@mui/material'
 import { bscCourses, mscCourses } from '../../../data/courses'
 import About from '../../pages/About'
 import CoursesPage from '../../pages/CoursesPage'
-import Card from '../../shared/Card'
 import TabPanel from '../../shared/TabPanel'
-import { useStyles } from './styles'
+import { AppBarCard, AppBarTab, Container, SwipeablePageViews } from './styles'
 
 export const pages: {
   hash: string
@@ -41,7 +38,6 @@ export const pages: {
 
 const SwipeablePage: FC = () => {
   const theme = useTheme()
-  const classes = useStyles()
   const [page, setPage] = useState(0)
 
   const changePage = useCallback((page: number) => {
@@ -55,8 +51,8 @@ const SwipeablePage: FC = () => {
   }, [])
 
   return (
-    <div className={classes.container}>
-      <Card className={classes.appBarContainer}>
+    <Container>
+      <AppBarCard>
         <Tabs
           value={page}
           onChange={(_, page) => changePage(page)}
@@ -64,17 +60,11 @@ const SwipeablePage: FC = () => {
           variant="scrollable"
         >
           {pages.map(({ hash, name }, index) => (
-            <Tab
-              key={`tab-${hash}`}
-              className={classes.tab}
-              label={name}
-              value={index}
-            />
+            <AppBarTab key={`tab-${hash}`} label={name} value={index} />
           ))}
         </Tabs>
-      </Card>
-      <SwipeableViews
-        className={classes.swipeableView}
+      </AppBarCard>
+      <SwipeablePageViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={page}
         onChangeIndex={changePage}
@@ -89,8 +79,8 @@ const SwipeablePage: FC = () => {
             {node}
           </TabPanel>
         ))}
-      </SwipeableViews>
-    </div>
+      </SwipeablePageViews>
+    </Container>
   )
 }
 

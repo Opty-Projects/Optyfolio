@@ -1,15 +1,14 @@
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/system'
 
-export const useStyles = makeStyles((theme) => ({
-  sentence: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: theme.spacing(2),
-  },
-  word: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
+export const Sentence = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  gap: theme.spacing(2),
+}))
+
+export const Word = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
 }))

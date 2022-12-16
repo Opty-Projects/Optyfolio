@@ -1,47 +1,48 @@
-import { makeStyles } from '@mui/styles'
+import { keyframes } from '@emotion/react'
+import { styled } from '@mui/system'
 
-export const useStyles = makeStyles((theme) => ({
-  outerChar: {
-    position: 'relative',
-    cursor: 'default',
-    fontFamily: ['Solway', 'serif'].join(','),
-    fontWeight: 800,
-    fontSize: 70,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 35,
+const fontSize = {
+  sm: 35,
+  md: 70,
+}
+
+const getCharAnimation = (breakpoint: keyof typeof fontSize) =>
+  keyframes({
+    '50%': {
+      fontSize: fontSize[breakpoint] * 2,
     },
+  })
+
+export const OuterCharSpan = styled('span')(({ theme }) => ({
+  position: 'relative',
+  cursor: 'default',
+  fontFamily: ['Solway', 'serif'].join(','),
+  fontWeight: 800,
+  fontSize: fontSize['md'],
+  [theme.breakpoints.down('sm')]: {
+    fontSize: fontSize['sm'],
   },
-  char: {
-    color: theme.palette.text.primary,
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
+}))
+
+export const CharSpan = styled('span')(({ theme }) => ({
+  color: theme.palette.text.primary,
+  '&:hover': {
+    color: theme.palette.primary.main,
   },
-  animatedChar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    display: 'none',
-    color: `${theme.palette.primary.main}60`,
-    zIndex: -1,
-  },
-  animatedCharActive: {
+}))
+
+export const AnimatedCharSpan = styled('span')(({ theme }) => ({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  display: 'none',
+  color: `${theme.palette.primary.main}60`,
+  zIndex: -1,
+  '&.active': {
     display: 'block',
-    animation: '$pulsingChar 1s ease',
+    animation: `${getCharAnimation('md')} 1s ease`,
     [theme.breakpoints.down('sm')]: {
-      animation: '$smPulsingChar 1s ease',
-    },
-  },
-  '@keyframes pulsingChar': {
-    '50%': {
-      fontSize: 140,
-      transform: 'translateX(-25%)',
-    },
-  },
-  '@keyframes smPulsingChar': {
-    '50%': {
-      fontSize: 70,
-      transform: 'translateX(-25%)',
+      animation: `${getCharAnimation('sm')} 1s ease`,
     },
   },
 }))

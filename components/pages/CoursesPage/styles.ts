@@ -1,46 +1,29 @@
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/system'
 
-export const useStyles = makeStyles((theme) => ({
-  title: {
-    fontWeight: 400,
-    fontSize: 'medium',
-  },
-  value: {
-    fontWeight: 600,
-    fontSize: 'large',
-  },
-  mediumLabel: {
-    fontWeight: 400,
-    fontSize: 'medium',
-    color: theme.palette.text.secondary,
-  },
-  smallLabel: {
-    fontWeight: 400,
-    fontSize: 'small',
-    color: theme.palette.text.secondary,
-  },
-  toggleButtonContent: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  section: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: theme.spacing(1 / 2),
-  },
-  links: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-end',
-    margin: theme.spacing(0, 1),
-  },
-  score: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export const ToggleButtonContent = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
+
+export const CourseSection = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: theme.spacing(1 / 2),
+}))
+
+export const CourseScoreContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
+
+export const CourseLinksContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-end',
+  margin: theme.spacing(0, 1),
 }))

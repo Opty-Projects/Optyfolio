@@ -1,13 +1,11 @@
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/system'
 
-export const useStyles = makeStyles((theme) => ({
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-    gap: theme.spacing(3),
-    padding: theme.spacing(3),
-  },
+export const TabPanelContainer = styled('div')(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'hidden',
+  gap: theme.spacing(3),
+  padding: theme.spacing(3),
 }))

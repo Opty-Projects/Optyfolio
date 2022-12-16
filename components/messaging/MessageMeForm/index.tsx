@@ -4,11 +4,8 @@ import { FC, useState } from 'react'
 import * as yup from 'yup'
 import { Cancel, Send } from '@mui/icons-material'
 import { Alert } from '@mui/lab'
-import LoadingButton from '@mui/lab/LoadingButton'
 import {
   AlertColor as AlertType,
-  Avatar,
-  Button,
   Portal,
   Slide,
   Snackbar,
@@ -16,7 +13,12 @@ import {
   Typography,
 } from '@mui/material'
 import { notifyMe } from '../../../api/messaging'
-import { useStyles } from './styles'
+import {
+  ActionButton,
+  Form,
+  FormSection,
+  SpecificallyGifAvatar,
+} from './styles'
 
 export interface MessageMeFormProps {
   onClose: () => void
@@ -50,10 +52,7 @@ Get in touch with me through one of my social networks.`,
 }
 
 const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
-  const classes = useStyles()
-  const [submissionAlert, setSubmissionAlert] = useState<
-    AlertType | undefined
-  >()
+  const [submissionAlert, setSubmissionAlert] = useState<AlertType>()
   const [messageFieldActive, setMessageFieldActive] = useState(false)
 
   const formik = useFormik({
@@ -74,8 +73,10 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
 
   return (
     <>
-      <Typography className={classes.title}>Message me 🚀</Typography>
-      <form className={classes.form} onSubmit={formik.handleSubmit}>
+      <Typography fontSize="x-large" fontWeight={500}>
+        Message me 🚀
+      </Typography>
+      <Form onSubmit={formik.handleSubmit}>
         <TextField
           id="name"
           name="name"
@@ -120,7 +121,7 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
           label="Subject"
           InputLabelProps={{ shrink: true }}
         />
-        <div className={classes.section}>
+        <FormSection>
           <TextField
             id="message"
             name="message"
@@ -153,23 +154,26 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
             mountOnEnter
             unmountOnExit
           >
-            <Avatar className={classes.gif}>
-              <Image src="/specifically.gif" layout="fill" />
-            </Avatar>
+            <SpecificallyGifAvatar>
+              <Image
+                src="/specifically.gif"
+                alt="specifically"
+                fill
+                sizes="100vw"
+              />
+            </SpecificallyGifAvatar>
           </Slide>
-        </div>
-        <div className={classes.section}>
-          <Button
-            className={classes.button}
+        </FormSection>
+        <FormSection>
+          <ActionButton
             color="primary"
             variant="outlined"
             endIcon={<Cancel />}
             onClick={handleClose}
           >
             Cancel
-          </Button>
-          <LoadingButton
-            className={classes.button}
+          </ActionButton>
+          <ActionButton
             color="primary"
             variant="contained"
             type="submit"
@@ -178,9 +182,9 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
             loadingPosition="end"
           >
             Send
-          </LoadingButton>
-        </div>
-      </form>
+          </ActionButton>
+        </FormSection>
+      </Form>
       <Portal container={document.body}>
         <Snackbar
           open={!!submissionAlert}

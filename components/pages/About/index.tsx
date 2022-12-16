@@ -1,37 +1,37 @@
 import Image from 'next/image'
 import { FC } from 'react'
-import {
-  Avatar,
-  Grid,
-  Icon,
-  LinearProgress,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Grid, Typography, useTheme } from '@mui/material'
 import { skills } from '../../../data/skills'
 import AnimatedSentence from '../../shared/AnimatedSentence'
-import Card from '../../shared/Card'
 import ExperienceTimeline from './ExperienceTimeline'
-import { useStyles } from './styles'
+import {
+  AboutAvatar,
+  AboutContainer,
+  AboutHeader,
+  AboutSection,
+  SkillContainer,
+  SkillGroupCard,
+  SkillProgress,
+} from './styles'
 
 const introductorySentence = "Hi! I'm Ricardo, Software Engineer"
 const About: FC = () => {
-  const classes = useStyles()
   const theme = useTheme()
 
   return (
-    <div className={classes.container}>
-      <div className={classes.grid}>
-        <Avatar className={classes.avatar}>
+    <AboutContainer>
+      <AboutHeader>
+        <AboutAvatar>
           <Image
             src="/avatar.jpg"
             alt="avatar"
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="100vw"
+            style={{ objectFit: 'cover' }}
           />
-        </Avatar>
+        </AboutAvatar>
         <AnimatedSentence sentence={introductorySentence} />
-      </div>
+      </AboutHeader>
 
       <AnimatedSentence sentence="Experience" />
       <ExperienceTimeline />
@@ -40,22 +40,21 @@ const About: FC = () => {
       <Grid container spacing={3}>
         {Object.entries(skills).map(([group, skills]) => (
           <Grid key={`skill-group-${group}`} item xs={12} sm={6} md={3}>
-            <Card className={classes.skillCard}>
-              <Typography className={classes.title}>{group}</Typography>
+            <SkillGroupCard>
+              <Typography fontSize="large">{group}</Typography>
               {skills.map(({ name, Icon, color, level }) => {
-                const skillColor = color || theme.palette.primary.contrastText
+                const skillColor =
+                  color ||
+                  (theme.palette.mode === 'dark' ? '#ffffff' : '#000000')
                 return (
-                  <div key={`skill-${name}`} className={classes.skill}>
-                    <div className={classes.section}>
-                      {Icon && (
-                        <Icon className={classes.icon} color={skillColor} />
-                      )}
-                      <Typography className={classes.value}>{name}</Typography>
-                    </div>
-                    <LinearProgress
-                      variant="determinate"
+                  <SkillContainer key={`skill-${name}`}>
+                    <AboutSection>
+                      {Icon && <Icon fontSize="large" color={skillColor} />}
+                      <Typography color="textSecondary">{name}</Typography>
+                    </AboutSection>
+                    <SkillProgress
                       value={level}
-                      className={classes.progress}
+                      variant="determinate"
                       sx={{
                         backgroundColor: `${skillColor}50`,
                         '& .MuiLinearProgress-bar': {
@@ -63,14 +62,14 @@ const About: FC = () => {
                         },
                       }}
                     />
-                  </div>
+                  </SkillContainer>
                 )
               })}
-            </Card>
+            </SkillGroupCard>
           </Grid>
         ))}
       </Grid>
-    </div>
+    </AboutContainer>
   )
 }
 

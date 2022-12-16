@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
-import { Box, Modal, Zoom } from '@mui/material'
-import Card from '../Card'
-import { useStyles } from './styles'
+import { Zoom } from '@mui/material'
+import { CenteredModal, ModalBox, ModalContentCard } from './styles'
 
 export interface AnimatedModalProps {
   open: boolean
@@ -13,23 +12,20 @@ const AnimatedModal: FC<PropsWithChildren<AnimatedModalProps>> = ({
   onClose,
   children,
 }) => {
-  const classes = useStyles()
-
   return (
-    <Modal
+    <CenteredModal
       open={open}
       onClose={onClose}
-      classes={{ root: classes.modal }}
       closeAfterTransition
       disableScrollLock
       keepMounted
     >
       <Zoom in={open}>
-        <Box className={classes.modalBox}>
-          <Card className={classes.modalContent}>{children}</Card>
-        </Box>
+        <ModalBox>
+          <ModalContentCard>{children}</ModalContentCard>
+        </ModalBox>
       </Zoom>
-    </Modal>
+    </CenteredModal>
   )
 }
 
