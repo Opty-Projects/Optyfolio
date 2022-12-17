@@ -7,5 +7,8 @@ export const TabPanelContainer = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   overflow: 'hidden',
   gap: theme.spacing(3),
-  padding: theme.spacing(3),
+  padding: theme.spacing(3, 2),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3),
+  },
 }))

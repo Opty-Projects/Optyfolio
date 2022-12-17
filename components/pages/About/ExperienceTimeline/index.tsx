@@ -69,7 +69,7 @@ const items: TimelineItem[] = [
 const ExperienceTimeline = () => {
   const theme = useTheme()
   return (
-    <Stepper orientation="vertical" sx={{ ml: theme.spacing(3 / 2) }}>
+    <Stepper orientation="vertical" sx={{ ml: theme.spacing(1) }}>
       {items.map(({ icon, title, label, body }, index) => (
         <Step key={`step-${index}`} active>
           <StepLabel

@@ -1,9 +1,11 @@
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react'
 import { Tabs, useTheme } from '@mui/material'
 import { bscCourses, mscCourses } from '../../../data/courses'
+import observeSmoothStepInElements from '../../../utils/smoothStepIn'
 import About from '../../pages/About'
 import CoursesPage from '../../pages/CoursesPage'
 import TabPanel from '../../shared/TabPanel'
+import Footer from '../Footer'
 import { AppBarCard, AppBarTab, Container, SwipeablePageViews } from './styles'
 
 export const pages: {
@@ -50,6 +52,8 @@ const SwipeablePage: FC = () => {
     setPage(page < 0 ? 0 : page)
   }, [])
 
+  useEffect(observeSmoothStepInElements, [page])
+
   return (
     <Container>
       <AppBarCard>
@@ -80,6 +84,7 @@ const SwipeablePage: FC = () => {
           </TabPanel>
         ))}
       </SwipeablePageViews>
+      <Footer />
     </Container>
   )
 }

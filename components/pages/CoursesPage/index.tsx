@@ -65,6 +65,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
               <Link
                 href="https://tecnico.ulisboa.pt/"
                 target="_blank"
+                rel="noopener noreferrer"
                 underline="hover"
               >
                 Instituto Superior Técnico
@@ -175,7 +176,11 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                           key={`${grouping}-${group}-${name}-${href}`}
                           title={tooltip}
                         >
-                          <IconButton href={href} target="_blank">
+                          <IconButton
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <Icon color={color || theme.palette.text.primary} />
                           </IconButton>
                         </Tooltip>

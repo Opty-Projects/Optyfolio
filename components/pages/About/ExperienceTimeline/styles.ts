@@ -6,7 +6,6 @@ export const TimelineItemCard = styled(CardContainer)(({ theme }) => ({
   flexDirection: 'row',
   flexWrap: 'wrap',
   alignItems: 'center',
-  justifyContent: 'center',
   gap: theme.spacing(2),
 }))
 

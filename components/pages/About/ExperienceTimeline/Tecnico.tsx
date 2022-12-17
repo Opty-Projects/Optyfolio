@@ -6,7 +6,7 @@ import { TimelineItemCard, TimelineItemSection } from './styles'
 
 const Tecnico: FC = () => {
   return (
-    <TimelineItemCard>
+    <TimelineItemCard className="smoothStepIn">
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           <TimelineItemSection>
@@ -15,6 +15,7 @@ const Tecnico: FC = () => {
               <Link
                 href="https://tecnico.ulisboa.pt/"
                 target="_blank"
+                rel="noopener noreferrer"
                 underline="hover"
               >
                 Instituto Superior Técnico
@@ -23,6 +24,7 @@ const Tecnico: FC = () => {
               <Link
                 href="https://www.usnews.com/education/best-global-universities/portugal/computer-science"
                 target="_blank"
+                rel="noopener noreferrer"
                 underline="hover"
               >
                 ranked
@@ -66,14 +68,14 @@ const Tecnico: FC = () => {
               <Typography color="textSecondary" textAlign="center">
                 Master's Thesis
               </Typography>
-              <Typography textAlign="center">
+              <Typography textAlign="center" whiteSpace="pre-line">
                 <Link
                   href="https://www.dropbox.com/home/MasterDissertation?preview=MasterThesis.pdf"
                   target="_blank"
                   underline="hover"
                 >
-                  CROSS City Mobile Application: Gamified Peer-Based Location
-                  Certification
+                  CROSS City Mobile Application:{'\n'}
+                  Gamified Peer-Based Location Certification
                 </Link>
               </Typography>
             </div>

@@ -15,13 +15,15 @@ const getCharAnimation = (breakpoint: keyof typeof fontSize) =>
 
 export const OuterCharSpan = styled('span')(({ theme }) => ({
   position: 'relative',
-  cursor: 'default',
   fontFamily: ['Solway', 'serif'].join(','),
   fontWeight: 800,
   fontSize: fontSize['md'],
   [theme.breakpoints.down('sm')]: {
     fontSize: fontSize['sm'],
   },
+  WebkitUserSelect: 'none',
+  userSelect: 'none',
+  msUserSelect: 'none',
 }))
 
 export const CharSpan = styled('span')(({ theme }) => ({

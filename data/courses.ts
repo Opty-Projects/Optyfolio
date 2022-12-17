@@ -387,9 +387,10 @@ export const mscCourses: Course[] = [
     period: '2nd year, 2nd semester',
     links: [
       {
-        href: 'https://github.com/surething-project/CROSSCityApp',
-        Icon: SiGithub,
-        tooltip: 'GitHub source code repository',
+        href: 'https://www.overleaf.com/read/xkgjbxpmkjbm',
+        Icon: SiOverleaf,
+        color: '#4caf50',
+        tooltip: 'Extended abstract Overleaf project',
       },
       {
         href: 'https://www.overleaf.com/read/jfznmjdwfjjv',
@@ -398,10 +399,9 @@ export const mscCourses: Course[] = [
         tooltip: 'Dissertation Overleaf project',
       },
       {
-        href: 'https://www.overleaf.com/read/xkgjbxpmkjbm',
-        Icon: SiOverleaf,
-        color: '#4caf50',
-        tooltip: 'Extended abstract Overleaf project',
+        href: 'https://github.com/surething-project/CROSSCityApp',
+        Icon: SiGithub,
+        tooltip: 'GitHub source code repository',
       },
       {
         href: 'https://youtu.be/g6Qp26nNgQk',

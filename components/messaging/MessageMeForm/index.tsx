@@ -35,8 +35,7 @@ const formPlaceholders = {
   email: 'john.doe@gmail.com',
   subject: 'Opportunity',
   message: `Hi Ricardo 👋
-I'm interested in (...)
-Please contact me at your earliest convenience.`,
+I'm interested in ...`,
 }
 const formInitialValues = {
   name: '',
@@ -74,7 +73,7 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
   return (
     <>
       <Typography fontSize="x-large" fontWeight={500}>
-        Message me 🚀
+        Contact me 🚀
       </Typography>
       <Form onSubmit={formik.handleSubmit}>
         <TextField

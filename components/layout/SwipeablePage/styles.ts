@@ -7,6 +7,10 @@ export const Container = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
   backgroundColor: theme.palette.background.default,
+  '*::selection': {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+  },
 }))
 
 export const AppBarCard = styled(CardContainer)(({ theme }) => ({

@@ -17,13 +17,15 @@ export const AboutSection = styled('div')(({ theme }) => ({
   gap: theme.spacing(1),
 }))
 
-export const AboutHeader = styled('div')(({ theme }) => ({
+export const AboutHeader = styled(CardContainer)(({ theme }) => ({
+  maxWidth: 800,
   display: 'flex',
   flexDirection: 'row',
-  flexWrap: 'wrap',
   alignItems: 'center',
-  justifyContent: 'center',
   gap: theme.spacing(3),
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+  },
 }))
 
 export const AboutAvatar = styled(Avatar)(({ theme }) => ({
