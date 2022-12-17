@@ -30,8 +30,8 @@ const Tecnico: FC = () => {
                 ranked
               </Link>{' '}
               several times as the best engineering university in Portugal,
-              where I've specialized in Distributed Systems &amp; Cyber-Security
-              and graduated with a 19/20 GPA.
+              where I&apos;ve specialized in Distributed Systems &amp;
+              Cyber-Security and graduated with a 19/20 GPA.
             </Typography>
             <Typography>
               My journey at Técnico was thankfully filled with academic
@@ -42,14 +42,14 @@ const Tecnico: FC = () => {
             </Typography>
             <Typography>
               During this period I got to teach lab classes of Distributed
-              Systems (3rd year course of the Computer Science Bachelor's
+              Systems (3rd year course of the Computer Science Bachelor&apos;s
               Degree) as Invited Teaching Assistant, and work on the development
               and maintenance of app features to support IST Management as
               Research Initiation Scholar @ Taguspark Computer Services Unit.
             </Typography>
             <Typography>
               That said, the most important take away was the huge amount of
-              learning I acquired and friends I've made for life.
+              learning I acquired and friends I&apos;ve made for life.
             </Typography>
           </TimelineItemSection>
         </Grid>
@@ -66,7 +66,7 @@ const Tecnico: FC = () => {
             </AboutAvatar>
             <div>
               <Typography color="textSecondary" textAlign="center">
-                Master's Thesis
+                Master&apos;s Thesis
               </Typography>
               <Typography textAlign="center" whiteSpace="pre-line">
                 <Link

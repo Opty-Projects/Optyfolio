@@ -49,7 +49,7 @@ const items: TimelineItem[] = [
     icon: <Icon src="/tecnico.png" />,
     title: (
       <Typography fontSize="large">
-        Computer Science &amp; Engineering Master's Degree @ Técnico
+        Computer Science &amp; Engineering Master&apos;s Degree @ Técnico
       </Typography>
     ),
     label: (

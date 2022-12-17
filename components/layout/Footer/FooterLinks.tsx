@@ -13,7 +13,7 @@ const FooterLinks: FC<FooterLinksProps> = ({ title, links }) => (
     <Typography color="textSecondary">{title}</Typography>
     <FooterLinksContainer>
       {links.map(({ href, Icon, tooltip }) => (
-        <Tooltip title={tooltip}>
+        <Tooltip key={href} title={tooltip}>
           <IconButton
             href={href}
             target="_blank"

@@ -1,6 +1,6 @@
 // Official example:
 // https://github.com/mui/material-ui/blob/master/examples/nextjs-with-typescript/pages/_app.tsx
-import App, { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useMemo } from 'react'
 import { CacheProvider, EmotionCache } from '@emotion/react'
