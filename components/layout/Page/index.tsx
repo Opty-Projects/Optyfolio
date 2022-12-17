@@ -13,7 +13,7 @@ export const pages: Record<string, string> = {
 
 const Page: FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter()
-  useEffect(observeSmoothStepInElements, [router.pathname])
+  useEffect(observeSmoothStepInElements, [router.asPath])
 
   return (
     <Container>

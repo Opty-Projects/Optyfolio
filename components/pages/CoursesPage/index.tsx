@@ -1,5 +1,6 @@
 import { groupBy, isEmpty } from 'lodash'
-import { FC, useMemo, useState } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useMemo } from 'react'
 import {
   ArrowDownward,
   ArrowUpward,
@@ -34,14 +35,18 @@ export interface CoursesPageProps {
   courses: Course[]
 }
 
+interface RouterQuery {
+  grouping?: 'period' | 'branch' | 'score'
+  sort?: 'asc' | 'desc'
+}
+
+const toggleSort = (sort: 'asc' | 'desc') => (sort === 'asc' ? 'desc' : 'asc')
 const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
   const theme = useTheme()
-  const [grouping, setGrouping] = useState<'period' | 'branch' | 'score'>(
-    'period'
-  )
-  const [sorting, setSorting] = useState<'asc' | 'desc'>('desc')
-  const sortTooltip = `Sort ${sorting === 'asc' ? 'desc' : 'asc'}ending`
-  const sortArrow = sorting === 'desc' ? <ArrowDownward /> : <ArrowUpward />
+  const router = useRouter()
+  const { grouping = 'period', sort = 'desc' } = router.query as RouterQuery
+  const sortTooltip = `Sort ${toggleSort(sort)}ending`
+  const sortArrow = sort === 'desc' ? <ArrowDownward /> : <ArrowUpward />
 
   const coursesWeightedAvg = useMemo(
     () => getCoursesWeightedAvg(courses),
@@ -50,9 +55,9 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
   const groupedCourses = useMemo(
     () =>
       Object.entries(groupBy(courses, grouping)).sort(([a], [b]) =>
-        sorting === 'asc' ? a.localeCompare(b) : b.localeCompare(a)
+        sort === 'asc' ? a.localeCompare(b) : b.localeCompare(a)
       ),
-    [courses, grouping, sorting]
+    [courses, grouping, sort]
   )
 
   return (
@@ -92,8 +97,14 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
         <ToggleButtonGroup
           value={grouping}
           onChange={(_, grouping) => {
-            if (grouping) setGrouping(grouping)
-            else setSorting((sorting) => (sorting === 'asc' ? 'desc' : 'asc'))
+            if (grouping)
+              router.replace({
+                query: { ...router.query, grouping },
+              })
+            else
+              router.replace({
+                query: { ...router.query, sort: toggleSort(sort) },
+              })
           }}
           exclusive
           color="primary"

@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import Image from 'next/image'
 import { FC, useState } from 'react'
 import * as yup from 'yup'
 import { Cancel, Send } from '@mui/icons-material'
@@ -13,12 +12,7 @@ import {
   Typography,
 } from '@mui/material'
 import { notifyMe } from '../../../api/messaging'
-import {
-  ActionButton,
-  Form,
-  FormSection,
-  SpecificallyGifAvatar,
-} from './styles'
+import { ActionButton, Form, FormSection } from './styles'
 
 export interface MessageMeFormProps {
   onClose: () => void
@@ -52,7 +46,6 @@ Get in touch with me through one of my social networks.`,
 
 const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
   const [submissionAlert, setSubmissionAlert] = useState<AlertType>()
-  const [messageFieldActive, setMessageFieldActive] = useState(false)
 
   const formik = useFormik({
     initialValues: formInitialValues,
@@ -120,49 +113,24 @@ const MessageMeForm: FC<MessageMeFormProps> = ({ onClose }) => {
           label="Subject"
           InputLabelProps={{ shrink: true }}
         />
-        <FormSection>
-          <TextField
-            id="message"
-            name="message"
-            type="text"
-            placeholder={formPlaceholders.message}
-            value={formik.values.message}
-            onChange={formik.handleChange}
-            onFocus={() => setMessageFieldActive(true)}
-            onBlur={(e) => {
-              setMessageFieldActive(false)
-              formik.handleBlur(e)
-            }}
-            error={formik.touched.message && Boolean(formik.errors.message)}
-            helperText={formik.touched.message && formik.errors.message}
-            required
-            fullWidth
-            multiline
-            minRows={5}
-            maxRows={10}
-            label="Message"
-            InputLabelProps={{ shrink: true }}
-          />
-          <Slide
-            in={
-              formik.touched.message &&
-              Boolean(formik.errors.message) &&
-              !messageFieldActive
-            }
-            direction="left"
-            mountOnEnter
-            unmountOnExit
-          >
-            <SpecificallyGifAvatar>
-              <Image
-                src="/specifically.gif"
-                alt="specifically"
-                fill
-                sizes="100vw"
-              />
-            </SpecificallyGifAvatar>
-          </Slide>
-        </FormSection>
+        <TextField
+          id="message"
+          name="message"
+          type="text"
+          placeholder={formPlaceholders.message}
+          value={formik.values.message}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.message && Boolean(formik.errors.message)}
+          helperText={formik.touched.message && formik.errors.message}
+          required
+          fullWidth
+          multiline
+          minRows={5}
+          maxRows={10}
+          label="Message"
+          InputLabelProps={{ shrink: true }}
+        />
         <FormSection>
           <ActionButton
             color="primary"
