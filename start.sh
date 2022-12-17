@@ -8,7 +8,7 @@ cd docker/development || exit
 
 if [[ $* == *-install* || ! -d ../../node_modules ]]; then
   echo "Installing dependencies"
-  docker-compose run --rm npm install --force
+  docker-compose run --rm npm install
 fi
 
 echo "Starting development environment"

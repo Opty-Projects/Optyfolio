@@ -1,4 +1,3 @@
-import SwipeableViews from 'react-swipeable-views'
 import { Tab } from '@mui/material'
 import { styled } from '@mui/system'
 import { CardContainer } from '../../shared/Card/styles'
@@ -28,7 +27,15 @@ export const AppBarTab = styled(Tab)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-export const SwipeablePageViews = styled(SwipeableViews)(({ theme }) => ({
+export const ContentPage = styled('div')(({ theme }) => ({
   width: '100%',
   height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'hidden',
+  gap: theme.spacing(3),
+  padding: theme.spacing(3, 2),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3),
+  },
 }))

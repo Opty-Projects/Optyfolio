@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import Page from '../components/layout/Page'
 import MessagingAction from '../components/messaging/MessagingAction'
 import getDesignTokens from '../styles/getDesignTokens'
 import createEmotionCache from '../utils/createEmotionCache'
@@ -32,7 +33,9 @@ const MyApp = ({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <Page>
+          <Component {...pageProps} />
+        </Page>
         <MessagingAction />
       </ThemeProvider>
     </CacheProvider>
