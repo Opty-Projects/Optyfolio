@@ -1,6 +1,14 @@
+import { IconButton } from '@mui/material'
 import { styled } from '@mui/system'
 
-export const ToggleButtonContent = styled('div')(({ theme }) => ({
+export const GroupButton = styled(IconButton)(({ theme }) => ({
+  borderRadius: 0,
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: theme.palette.divider,
+}))
+
+export const GroupButtonContent = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',

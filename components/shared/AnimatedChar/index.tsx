@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react'
 import { Slide } from '@mui/material'
-import { AnimatedCharSpan, CharSpan, OuterCharSpan } from './styles'
+import { CharSpan } from './styles'
 
 export interface AnimatedCharProps {
   char: string
@@ -16,12 +16,13 @@ const AnimatedChar: FC<AnimatedCharProps> = ({ char, index }) => {
 
   return (
     <Slide in direction="up" timeout={300 + index * 50}>
-      <OuterCharSpan onMouseEnter={startAnimation} onMouseLeave={stopAnimation}>
-        <CharSpan>{char}</CharSpan>
-        <AnimatedCharSpan ref={animatedCharRef} onAnimationEnd={stopAnimation}>
-          {char}
-        </AnimatedCharSpan>
-      </OuterCharSpan>
+      <CharSpan
+        onMouseEnter={startAnimation}
+        onAnimationEnd={stopAnimation}
+        ref={animatedCharRef}
+      >
+        {char}
+      </CharSpan>
     </Slide>
   )
 }

@@ -15,6 +15,9 @@ export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache
 }
 
+const description = `Ricardo is a Software Engineer passionate about building scalable and reliable applications that offer a good user experience.
+He highly values the quality and cleanliness of the code he develops.
+In his spare time, he likes to watch series, play video games, have dinner and carry out various activities with friends, and of course, learn new frameworks and technologies that allow him to improve his skills as a developer.`
 const clientSideEmotionCache = createEmotionCache()
 const MyApp = ({
   Component,
@@ -27,8 +30,25 @@ const MyApp = ({
     <CacheProvider value={emotionCache}>
       <Head>
         <title>Optyfolio</title>
-        <meta name="description" content="Ricardo Grade's portfolio" />
         <link rel="icon" href="/portfolio.png" />
+        <meta name="title" property="og:title" content="Optyfolio" />
+        <meta name="type" property="og:type" content="Portfolio" />
+        <meta
+          name="url"
+          property="og:url"
+          content="https://ricardograde.dev/"
+        />
+        <meta
+          name="image"
+          property="og:image"
+          content="https://ricardograde.dev/portfolio.png"
+        />
+        <meta
+          name="description"
+          property="og:description"
+          content={description}
+        />
+        <meta name="author" property="og:author" content="Ricardo Grade" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>

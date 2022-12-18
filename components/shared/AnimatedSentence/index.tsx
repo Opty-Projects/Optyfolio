@@ -8,7 +8,7 @@ export interface AnimatedSentenceProps {
 
 const AnimatedSentence: FC<AnimatedSentenceProps> = ({ sentence }) => {
   return (
-    <Sentence>
+    <Sentence className="notranslate">
       {sentence.split(' ').map((word, index) => (
         <Word key={`word-${index}`}>
           {word.split('').map((char, index) => (

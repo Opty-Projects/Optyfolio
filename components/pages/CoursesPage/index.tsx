@@ -13,8 +13,6 @@ import {
   Grid,
   IconButton,
   Link,
-  ToggleButton,
-  ToggleButtonGroup,
   Tooltip,
   Typography,
   useTheme,
@@ -26,7 +24,8 @@ import {
   CourseLinksContainer,
   CourseScoreContainer,
   CourseSection,
-  ToggleButtonContent,
+  GroupButton,
+  GroupButtonContent,
 } from './styles'
 
 export interface CoursesPageProps {
@@ -35,12 +34,20 @@ export interface CoursesPageProps {
   courses: Course[]
 }
 
+const groupings = ['period', 'branch', 'score']
+const toggleSort = (sort: 'asc' | 'desc') => (sort === 'asc' ? 'desc' : 'asc')
+
 interface RouterQuery {
-  grouping?: 'period' | 'branch' | 'score'
+  grouping?: typeof groupings[number]
   sort?: 'asc' | 'desc'
 }
 
-const toggleSort = (sort: 'asc' | 'desc') => (sort === 'asc' ? 'desc' : 'asc')
+const groupingIcons = {
+  period: <CalendarToday />,
+  branch: <Category />,
+  score: <MilitaryTech />,
+}
+
 const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
   const theme = useTheme()
   const router = useRouter()
@@ -94,55 +101,38 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
       </Card>
       <CourseSection>
         <Typography color="textSecondary">Group by:</Typography>
-        <ToggleButtonGroup
-          value={grouping}
-          onChange={(_, grouping) => {
-            if (grouping)
-              router.replace({
-                query: { ...router.query, grouping },
-              })
-            else
-              router.replace({
-                query: { ...router.query, sort: toggleSort(sort) },
-              })
-          }}
-          exclusive
-          color="primary"
-        >
-          <ToggleButton value="period">
+        <GroupButtonContent>
+          {groupings.map((group) => (
             <Tooltip
-              title={grouping === 'period' ? sortTooltip : 'Group by period'}
+              key={`group-${group}`}
+              title={grouping === group ? sortTooltip : `Group by ${group}`}
             >
-              <ToggleButtonContent>
-                <CalendarToday />
-                {grouping === 'period' && sortArrow}
-              </ToggleButtonContent>
+              <GroupButton
+                value={group}
+                color={grouping === group ? 'primary' : 'default'}
+                onClick={() =>
+                  router.replace({
+                    query: {
+                      grouping: group,
+                      sort: grouping === group ? toggleSort(sort) : sort,
+                    },
+                  })
+                }
+                sx={{
+                  borderColor: grouping === group ? 'primary.main' : 'divider',
+                }}
+              >
+                <GroupButtonContent>
+                  {groupingIcons[group as keyof typeof groupingIcons]}
+                  {grouping === group && sortArrow}
+                </GroupButtonContent>
+              </GroupButton>
             </Tooltip>
-          </ToggleButton>
-          <ToggleButton value="branch">
-            <Tooltip
-              title={grouping === 'branch' ? sortTooltip : 'Group by branch'}
-            >
-              <ToggleButtonContent>
-                <Category />
-                {grouping === 'branch' && sortArrow}
-              </ToggleButtonContent>
-            </Tooltip>
-          </ToggleButton>
-          <ToggleButton value="score">
-            <Tooltip
-              title={grouping === 'score' ? sortTooltip : 'Group by score'}
-            >
-              <ToggleButtonContent>
-                <MilitaryTech />
-                {grouping === 'score' && sortArrow}
-              </ToggleButtonContent>
-            </Tooltip>
-          </ToggleButton>
-        </ToggleButtonGroup>
+          ))}
+        </GroupButtonContent>
       </CourseSection>
       {groupedCourses?.map(([group, courses]) => (
-        <Grid key={`${grouping}-${group}`} container spacing={2}>
+        <Grid key={`courses-${grouping}-${group}`} container spacing={2}>
           <Grid item xs={12}>
             <CourseSection>
               <Typography color="textSecondary">

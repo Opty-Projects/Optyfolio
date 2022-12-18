@@ -6,45 +6,41 @@ const fontSize = {
   md: 70,
 }
 
-const getCharAnimation = (breakpoint: keyof typeof fontSize) =>
-  keyframes({
-    '50%': {
-      fontSize: fontSize[breakpoint] * 2,
-    },
-  })
+const squish = keyframes({
+  '0%': {
+    transform: 'scale(1,1)',
+  },
+  '25%': {
+    transform: 'scale(1,0.5)',
+  },
+  '50%': {
+    transform: 'scale(1,1.5)',
+  },
+  '75%': {
+    transform: 'scale(1,0.75)',
+  },
+  '100%': {
+    transform: 'scale(1,1)',
+  },
+})
 
-export const OuterCharSpan = styled('span')(({ theme }) => ({
-  position: 'relative',
+export const CharSpan = styled('span')(({ theme }) => ({
   fontFamily: ['Solway', 'serif'].join(','),
   fontWeight: 800,
+  cursor: 'default',
   fontSize: fontSize['md'],
   [theme.breakpoints.down('sm')]: {
     fontSize: fontSize['sm'],
   },
-  WebkitUserSelect: 'none',
-  userSelect: 'none',
-  msUserSelect: 'none',
-}))
-
-export const CharSpan = styled('span')(({ theme }) => ({
   color: theme.palette.text.primary,
   '&:hover': {
     color: theme.palette.primary.main,
   },
-}))
-
-export const AnimatedCharSpan = styled('span')(({ theme }) => ({
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  display: 'none',
-  color: `${theme.palette.primary.main}60`,
-  zIndex: -1,
   '&.active': {
     display: 'block',
-    animation: `${getCharAnimation('md')} 1s ease`,
+    animation: `${squish} 1s ease-in-out`,
     [theme.breakpoints.down('sm')]: {
-      animation: `${getCharAnimation('sm')} 1s ease`,
+      animation: `${squish} 1s ease-in-out`,
     },
   },
 }))
