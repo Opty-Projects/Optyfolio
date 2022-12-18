@@ -16,12 +16,12 @@ export const certificates: Link[] = [
     tooltip: 'High school certificates',
   },
   {
-    href: 'https://www.dropbox.com/sh/f7yrt0tvt8ugrq5/AAB8CPU6U6_HnKtS5hS86tFma?dl=0',
+    href: 'https://www.dropbox.com/sh/4sh29fvjv5y01qk/AAAASJlkjH8PxnVZX0hsEf43a?dl=0',
     Icon: IoSchool,
     tooltip: 'University certificates',
   },
   {
-    href: 'https://www.dropbox.com/sh/v7c75s4i3fzupsu/AACP41hE0HLL2VzzndK3JRpha?dl=0',
+    href: 'https://www.dropbox.com/sh/sovrxx25zwvukf0/AAAKGlPZ3jWK8uFnT2w_CPbfa?dl=0',
     Icon: SiUdemy,
     tooltip: 'Udemy certificates',
   },
