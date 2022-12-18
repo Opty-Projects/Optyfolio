@@ -9,7 +9,11 @@ const MessagingAction: FC = () => {
 
   return (
     <>
-      <MessagingFab onClick={() => setOpenMessageMeModal(true)} color="primary">
+      <MessagingFab
+        onClick={() => setOpenMessageMeModal(true)}
+        color="primary"
+        size="medium"
+      >
         <Message />
       </MessagingFab>
       <AnimatedModal

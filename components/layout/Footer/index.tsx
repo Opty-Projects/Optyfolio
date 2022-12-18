@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { SiReact } from 'react-icons/si'
 import { Divider, IconButton, Link, Tooltip, Typography } from '@mui/material'
+import { lightBlue } from '@mui/material/colors'
 import { certificates, socialNetworks } from '../../../data/links'
 import FooterLinks from './FooterLinks'
 import { FooterContainer, FooterSection } from './styles'
@@ -21,7 +22,7 @@ const Footer: FC = () => {
             rel="noopener noreferrer"
             color="primary"
           >
-            <SiReact color="#61dbfb" />
+            <SiReact color={lightBlue[600]} />
           </IconButton>
         </Tooltip>
         <Typography color="textSecondary">

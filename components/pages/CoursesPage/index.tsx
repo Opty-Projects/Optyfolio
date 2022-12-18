@@ -170,9 +170,9 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                   )}
                 </div>
                 <CourseSection>
-                  {!isEmpty(links) && (
+                  {links && !isEmpty(links) && (
                     <CourseLinksContainer>
-                      {links!.map(({ href, Icon, color, tooltip }) => (
+                      {links.map(({ href, Icon, color, tooltip }) => (
                         <Tooltip
                           key={`${grouping}-${group}-${name}-${href}`}
                           title={tooltip}

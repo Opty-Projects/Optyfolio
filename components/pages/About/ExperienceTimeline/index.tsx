@@ -6,7 +6,6 @@ import {
   StepLabel,
   Stepper,
   Typography,
-  useTheme,
 } from '@mui/material'
 import Talka from './Talka'
 import Tecnico from './Tecnico'
@@ -22,8 +21,8 @@ const Icon: FC<{ src: string }> = ({ src }) => (
   <Image
     src={src}
     alt="logo"
-    width={49}
-    height={49}
+    width={40}
+    height={40}
     style={{ objectFit: 'contain' }}
   />
 )
@@ -67,21 +66,14 @@ const items: TimelineItem[] = [
 ]
 
 const ExperienceTimeline = () => {
-  const theme = useTheme()
   return (
-    <Stepper orientation="vertical" sx={{ ml: theme.spacing(1) }}>
+    <Stepper orientation="vertical" sx={{ ml: 1 }}>
       {items.map(({ icon, title, label, body }, index) => (
         <Step key={`step-${index}`} active>
-          <StepLabel
-            optional={label}
-            icon={icon}
-            sx={{ ml: theme.spacing(-3 / 2) }}
-          >
+          <StepLabel optional={label} icon={icon} sx={{ ml: -1 }}>
             {title}
           </StepLabel>
-          <StepContent sx={{ p: theme.spacing(3, 0, 0, 3) }}>
-            {body}
-          </StepContent>
+          <StepContent sx={{ pt: 3, pl: 3 }}>{body}</StepContent>
         </Step>
       ))}
     </Stepper>

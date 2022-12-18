@@ -1,5 +1,6 @@
 import { IconType } from 'react-icons'
 import { SiGithub, SiOverleaf, SiYoutube } from 'react-icons/si'
+import { green, red } from '@mui/material/colors'
 
 export interface Course {
   name: string
@@ -389,13 +390,13 @@ export const mscCourses: Course[] = [
       {
         href: 'https://www.overleaf.com/read/xkgjbxpmkjbm',
         Icon: SiOverleaf,
-        color: '#4caf50',
+        color: green[600],
         tooltip: 'Extended abstract Overleaf project',
       },
       {
         href: 'https://www.overleaf.com/read/jfznmjdwfjjv',
         Icon: SiOverleaf,
-        color: '#4caf50',
+        color: green[600],
         tooltip: 'Dissertation Overleaf project',
       },
       {
@@ -406,7 +407,7 @@ export const mscCourses: Course[] = [
       {
         href: 'https://youtu.be/g6Qp26nNgQk',
         Icon: SiYoutube,
-        color: '#f44336',
+        color: red[600],
         tooltip: 'IEEE NCA 2022 presentation',
       },
     ],
@@ -422,7 +423,7 @@ export const mscCourses: Course[] = [
       {
         href: 'https://www.overleaf.com/read/hsgrgwmcmhnr',
         Icon: SiOverleaf,
-        color: '#4caf50',
+        color: green[600],
         tooltip: 'Overleaf project',
       },
     ],
