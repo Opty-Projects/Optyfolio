@@ -15,9 +15,9 @@ import {
 } from './styles'
 
 const introductorySentence = "Hi! I'm Ricardo, Software Engineer"
-const introductoryDescription = `I'm passionate about building scalable and reliable applications that offer a good user experience.
-I highly value the quality and cleanliness of the code I develop.
-In my spare time, I like to watch series, play video games, have dinner and carry out various activities with friends, and of course, learn new frameworks and technologies that allow me to improve my skills as a developer.`
+const introductoryDescription = `I'm passionate about building scalable and reliable applications that provide a good user experience.
+I place a strong emphasis on the quality and cleanliness of my code.
+In my free time, I enjoy watching TV series, playing video games, socializing with friends, and staying up to date with the latest frameworks and technologies to improve my skills as a developer.`
 const About: FC = () => {
   const theme = useTheme()
   const getSkillColor = (color?: string) =>

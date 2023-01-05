@@ -21,9 +21,9 @@ export const PaletteModeContext = createContext<{
 
 const clientSideEmotionCache = createEmotionCache()
 const localStorage = typeof window !== 'undefined' ? window.localStorage : null
-const description = `Ricardo is a Software Engineer passionate about building scalable and reliable applications that offer a good user experience.
-He highly values the quality and cleanliness of the code he develops.
-In his spare time, he likes to watch series, play video games, have dinner and carry out various activities with friends, and of course, learn new frameworks and technologies that allow him to improve his skills as a developer.`
+const description = `Ricardo is a Software Engineer passionate about building scalable and reliable applications that provide a good user experience.
+He places a strong emphasis on the quality and cleanliness of his code.
+In his free time, he enjoys watching TV series, playing video games, socializing with friends, and staying up to date with the latest frameworks and technologies to improve his skills as a developer.`
 const MyApp = ({
   Component,
   pageProps,
