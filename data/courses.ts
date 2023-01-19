@@ -10,7 +10,7 @@ export interface Course {
   period: string
   links?: {
     href: string
-    Icon: IconType
+    Icon: IconType | string
     color?: string
     tooltip: string
   }[]
@@ -388,6 +388,11 @@ export const mscCourses: Course[] = [
     period: '2nd year, 2nd semester',
     links: [
       {
+        href: 'https://github.com/surething-project/CROSSCityApp',
+        Icon: SiGithub,
+        tooltip: 'GitHub source code repository',
+      },
+      {
         href: 'https://www.overleaf.com/read/xkgjbxpmkjbm',
         Icon: SiOverleaf,
         color: green[600],
@@ -400,9 +405,9 @@ export const mscCourses: Course[] = [
         tooltip: 'Dissertation Overleaf project',
       },
       {
-        href: 'https://github.com/surething-project/CROSSCityApp',
-        Icon: SiGithub,
-        tooltip: 'GitHub source code repository',
+        href: 'https://ieeexplore.ieee.org/document/10013607',
+        Icon: '/ieee.png',
+        tooltip: 'IEEE NCA 2022 article publication',
       },
       {
         href: 'https://youtu.be/g6Qp26nNgQk',

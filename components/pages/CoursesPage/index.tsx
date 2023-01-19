@@ -1,4 +1,5 @@
 import { groupBy, isEmpty } from 'lodash'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { FC, useMemo } from 'react'
 import {
@@ -182,7 +183,19 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Icon color={color || theme.palette.text.primary} />
+                            {typeof Icon === 'string' ? (
+                              <Image
+                                src={Icon}
+                                alt="icon"
+                                width={32}
+                                height={32}
+                                style={{ objectFit: 'contain' }}
+                              />
+                            ) : (
+                              <Icon
+                                color={color || theme.palette.text.primary}
+                              />
+                            )}
                           </IconButton>
                         </Tooltip>
                       ))}
