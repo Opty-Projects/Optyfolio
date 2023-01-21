@@ -9,7 +9,7 @@ const AboutPage: NextPage = () => {
   useEffect(() => {
     router.prefetch('/bsc')
     router.prefetch('/msc')
-  }, [])
+  }, [router])
 
   return (
     <>

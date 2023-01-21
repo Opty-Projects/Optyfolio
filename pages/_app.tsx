@@ -6,6 +6,7 @@ import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { CacheProvider, EmotionCache } from '@emotion/react'
 import { CssBaseline, PaletteMode } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { Analytics } from '@vercel/analytics/react'
 import Page from '../components/layout/Page'
 import MessagingAction from '../components/messaging/MessagingAction'
 import getDesignTokens from '../styles/getDesignTokens'
@@ -86,6 +87,7 @@ const MyApp = ({
           </PaletteModeContext.Provider>
         </ThemeProvider>
       </CacheProvider>
+      <Analytics />
     </>
   )
 }
