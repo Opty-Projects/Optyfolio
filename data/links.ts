@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons'
-import { FaGlobe, FaSchool } from 'react-icons/fa'
-import { IoSchool } from 'react-icons/io5'
+import { FaGlobe } from 'react-icons/fa'
+import { MdSchool } from 'react-icons/md'
 import { SiGithub, SiLinkedin, SiUdemy } from 'react-icons/si'
 
 export interface Link {
@@ -11,13 +11,8 @@ export interface Link {
 
 export const certificates: Link[] = [
   {
-    href: 'https://www.dropbox.com/sh/de630iboukz9n7j/AAAGsjfkRv30dD20LlfmBoDWa?dl=0',
-    Icon: FaSchool,
-    tooltip: 'High school certificates',
-  },
-  {
     href: 'https://www.dropbox.com/sh/4sh29fvjv5y01qk/AAAASJlkjH8PxnVZX0hsEf43a?dl=0',
-    Icon: IoSchool,
+    Icon: MdSchool,
     tooltip: 'University certificates',
   },
   {
