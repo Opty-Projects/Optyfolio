@@ -1,6 +1,6 @@
 import { IconType } from 'react-icons'
 import { FaGlobe } from 'react-icons/fa'
-import { MdSchool } from 'react-icons/md'
+import { MdSchool, MdSummarize } from 'react-icons/md'
 import { SiGithub, SiLinkedin, SiUdemy } from 'react-icons/si'
 
 export interface Link {
@@ -10,6 +10,11 @@ export interface Link {
 }
 
 export const certificates: Link[] = [
+  {
+    href: 'https://www.dropbox.com/s/goirw4ehx8b0tif/CV.pdf?dl=0',
+    Icon: MdSummarize,
+    tooltip: 'Curriculum Vitae',
+  },
   {
     href: 'https://www.dropbox.com/sh/4sh29fvjv5y01qk/AAAASJlkjH8PxnVZX0hsEf43a?dl=0',
     Icon: MdSchool,
