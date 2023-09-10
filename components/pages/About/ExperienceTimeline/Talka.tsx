@@ -41,9 +41,10 @@ const Talka: FC = () => {
           products. In addition to this, I spearheaded the integration of video
           conferencing platforms, such as Zoom, into our product, leading to the
           automatic uploading of meetings to our system, streamlining the user
-          experience. Moreover, I have trained a pair of text-based AI models.
-          Additionally, I designed a system that evaluates the quality of our
-          data annotations and assesses the performance of our raters.
+          experience. Moreover, I have trained a few text-based AI models for
+          classification and fine-tuned LLMs for specific tasks. Additionally, I
+          designed a system that evaluates the quality of our data annotations
+          and assesses the performance of our raters.
         </Typography>
       </TimelineItemSection>
     </TimelineItemCard>
