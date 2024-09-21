@@ -3,13 +3,14 @@ import { GrMysql } from 'react-icons/gr'
 import { RiJavaFill, RiVuejsFill } from 'react-icons/ri'
 import {
   SiAngular,
-  SiFirebase,
+  SiDjango,
   SiFlask,
   SiMongodb,
   SiNodedotjs,
   SiPostgresql,
   SiPython,
   SiReact,
+  SiSpringboot,
   SiTypescript,
 } from 'react-icons/si'
 import {
@@ -38,10 +39,10 @@ export const skills: Record<string, Skill[]> = {
     { name: 'Angular', Icon: SiAngular, color: red[600], level: 65 },
   ],
   'Backend Frameworks': [
-    { name: 'Express', Icon: SiNodedotjs, color: green[600], level: 95 },
-    { name: 'Flask', Icon: SiFlask, color: teal[600], level: 95 },
-    { name: 'Django', Icon: SiFlask, level: 75 },
-    { name: 'Spring Boot', Icon: SiFirebase, color: yellow[700], level: 70 },
+    { name: 'Express', Icon: SiNodedotjs, color: yellow[700], level: 95 },
+    { name: 'Flask', Icon: SiFlask, level: 95 },
+    { name: 'Django', Icon: SiDjango, color: teal[600], level: 75 },
+    { name: 'Spring Boot', Icon: SiSpringboot, color: green[600], level: 70 },
   ],
   Databases: [
     { name: 'MongoDB', Icon: SiMongodb, color: green[600], level: 90 },
