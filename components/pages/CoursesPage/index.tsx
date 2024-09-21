@@ -39,7 +39,7 @@ const groupings = ['period', 'branch', 'score']
 const toggleSort = (sort: 'asc' | 'desc') => (sort === 'asc' ? 'desc' : 'asc')
 
 interface RouterQuery {
-  grouping?: typeof groupings[number]
+  grouping?: (typeof groupings)[number]
   sort?: 'asc' | 'desc'
 }
 

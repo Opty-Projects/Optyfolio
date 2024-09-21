@@ -11,7 +11,7 @@ export interface Link {
 
 export const certificates: Link[] = [
   {
-    href: 'https://www.dropbox.com/s/goirw4ehx8b0tif/CV.pdf?dl=0',
+    href: 'https://www.dropbox.com/scl/fi/zf6y147yfrjlpxqqy3eiy/CV.pdf?rlkey=3vy3d03lhnwdhrogadymnc5df&st=nobt3ykt&dl=0',
     Icon: MdSummarize,
     tooltip: 'Curriculum Vitae',
   },

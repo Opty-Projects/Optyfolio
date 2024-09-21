@@ -30,7 +30,9 @@ const items: TimelineItem[] = [
   {
     icon: <Icon src="/talka.png" />,
     title: (
-      <Typography fontSize="large">Software Engineer @ Talka.ai</Typography>
+      <Typography fontSize="large">
+        Senior Software Engineer @ Talka.ai
+      </Typography>
     ),
     label: (
       <div>
