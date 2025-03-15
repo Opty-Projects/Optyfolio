@@ -29,8 +29,8 @@ export const AboutHeader = styled(CardContainer)(({ theme }) => ({
 }))
 
 export const AboutAvatar = styled(Avatar)(({ theme }) => ({
-  width: 200,
-  height: 200,
+  width: 128,
+  height: 128,
   margin: 'auto',
   '&:hover': {
     transition: 'all 0.2s ease-in-out',

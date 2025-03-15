@@ -7,6 +7,7 @@ import {
   Stepper,
   Typography,
 } from '@mui/material'
+import SureThing from './SureThing'
 import Talka from './Talka'
 import Tecnico from './Tecnico'
 
@@ -40,11 +41,30 @@ const items: TimelineItem[] = [
           Work
         </Typography>
         <Typography fontSize="small" color="textSecondary">
-          2022 - Present
+          Sep 2022 - Present
         </Typography>
       </div>
     ),
     body: <Talka />,
+  },
+  {
+    icon: <Icon src="/sure_thing.png" />,
+    title: (
+      <Typography fontSize="large">
+        Software Engineer Intern @ SureThing
+      </Typography>
+    ),
+    label: (
+      <div>
+        <Typography fontSize="small" color="textSecondary">
+          Work
+        </Typography>
+        <Typography fontSize="small" color="textSecondary">
+          Sep 2021 - Sep 2022
+        </Typography>
+      </div>
+    ),
+    body: <SureThing />,
   },
   {
     icon: <Icon src="/tecnico.png" />,
@@ -59,7 +79,7 @@ const items: TimelineItem[] = [
           Education
         </Typography>
         <Typography fontSize="small" color="textSecondary">
-          2017 - 2022
+          Sep 2017 - Sep 2022
         </Typography>
       </div>
     ),
