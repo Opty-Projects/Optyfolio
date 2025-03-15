@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Image from 'next/image'
 import { FC, ReactNode } from 'react'
 import {
@@ -7,6 +8,7 @@ import {
   Stepper,
   Typography,
 } from '@mui/material'
+import { getDateDelta } from './datetime'
 import SureThing from './SureThing'
 import Talka from './Talka'
 import Tecnico from './Tecnico'
@@ -41,7 +43,8 @@ const items: TimelineItem[] = [
           Work
         </Typography>
         <Typography fontSize="small" color="textSecondary">
-          Sep 2022 - Present
+          {moment('2022-09-01').format('MMM YYYY')} - Present •{' '}
+          {getDateDelta('2022-09-01', moment())}
         </Typography>
       </div>
     ),
@@ -60,7 +63,9 @@ const items: TimelineItem[] = [
           Work
         </Typography>
         <Typography fontSize="small" color="textSecondary">
-          Sep 2021 - Sep 2022
+          {moment('2021-09-01').format('MMM YYYY')} -{' '}
+          {moment('2022-09-01').format('MMM YYYY')} •{' '}
+          {getDateDelta('2021-09-01', '2022-09-01')}
         </Typography>
       </div>
     ),
@@ -70,7 +75,7 @@ const items: TimelineItem[] = [
     icon: <Icon src="/tecnico.png" />,
     title: (
       <Typography fontSize="large">
-        Computer Science &amp; Engineering Master&apos;s Degree @ Técnico
+        Computer Science &amp; Engineering BSc &amp; MSc @ Técnico
       </Typography>
     ),
     label: (
@@ -79,7 +84,9 @@ const items: TimelineItem[] = [
           Education
         </Typography>
         <Typography fontSize="small" color="textSecondary">
-          Sep 2017 - Sep 2022
+          {moment('2017-09-01').format('MMM YYYY')} -{' '}
+          {moment('2022-09-01').format('MMM YYYY')} •{' '}
+          {getDateDelta('2017-09-01', '2022-09-01')}
         </Typography>
       </div>
     ),
