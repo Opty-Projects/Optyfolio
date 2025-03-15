@@ -70,7 +70,7 @@ const Tecnico: FC = () => {
               </Typography>
               <Typography textAlign="center" whiteSpace="pre-line">
                 <Link
-                  href="https://www.dropbox.com/home/MasterDissertation?preview=MasterThesis.pdf"
+                  href="https://youtu.be/g6Qp26nNgQk"
                   target="_blank"
                   underline="hover"
                 >
