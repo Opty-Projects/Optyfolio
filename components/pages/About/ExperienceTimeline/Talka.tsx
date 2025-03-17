@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import { Link, Typography } from '@mui/material'
-import { TimelineItemCard, TimelineItemSection } from './styles'
+import { FC } from 'react';
+import { Link, Typography } from '@mui/material';
+import { TimelineItemCard, TimelineItemSection } from './styles';
 
 const Talka: FC = () => {
   return (
@@ -21,14 +21,14 @@ const Talka: FC = () => {
           managers with insights extracted from their sales meetings.
         </Typography>
         <Typography>
-          <u>As a pivotal engineer in Talka:</u>
+          <u>As a pivotal engineer in Talka</u>:
           <li>
-            I single-handedly designed and built the Frontend of our React apps
-            and am now responsible for maintaining and extending it with new
+            I designed and built from scratch the Frontend of our React apps and
+            am now responsible for maintaining and extending it with new
             features.
           </li>
           <li>
-            I created, extended and am responsible for several core Python
+            I created, extended and am responsible for multiple core Python
             microservices supporting our apps.
           </li>
           <li>
@@ -45,7 +45,7 @@ const Talka: FC = () => {
           </li>
           <li>
             I am responsible for containerizing, configuring, deploying and
-            maintaining all services I take to production in GCP.
+            maintaining multiple services in GCP.
           </li>
           <li>I mentor new developers joining the team.</li>
         </Typography>
