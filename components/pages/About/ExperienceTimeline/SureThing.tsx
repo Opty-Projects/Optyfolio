@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import { FC } from 'react'
-import { Grid, Link, Typography } from '@mui/material'
-import { AboutAvatar } from '../styles'
-import { TimelineItemCard, TimelineItemSection } from './styles'
+import Image from 'next/image';
+import { FC } from 'react';
+import { Grid, Link, Typography } from '@mui/material';
+import { AboutAvatar } from '../styles';
+import { TimelineItemCard, TimelineItemSection } from './styles';
 
 const SureThing: FC = () => {
   return (
@@ -20,14 +20,14 @@ const SureThing: FC = () => {
                 SureThing
               </Link>
               &apos;s mission is to address today&apos;s security need in IoT.
-            </Typography>
-            <Typography>
-              <li>
-                I designed and integrated a peer-based location certification
-                strategy into a smart tourism Android app, which leverages the
-                moments when user devices see each other via Bluetooth.
-              </li>
-              <li>I developed gamification features into the app.</li>
+              <ul>
+                <li>
+                  I designed and integrated a peer-based location certification
+                  strategy into a smart tourism Android app, which leverages the
+                  moments when user devices see each other via Bluetooth.
+                </li>
+                <li>I developed gamification features into the app.</li>
+              </ul>
             </Typography>
           </TimelineItemSection>
         </Grid>
