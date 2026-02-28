@@ -21,7 +21,7 @@ const Talka: FC = () => {
           managers with insights extracted from their sales meetings.
         </Typography>
         <Typography>
-          <u>As a pivotal engineer in Talka</u>:
+          <u>As a founding engineer in Talka</u>:
           <ul>
             <li>
               I designed and built from scratch the Frontend of our React apps and

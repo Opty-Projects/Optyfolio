@@ -1,17 +1,11 @@
-import moment from 'moment'
-import Image from 'next/image'
-import { FC, ReactNode } from 'react'
-import {
-  Step,
-  StepContent,
-  StepLabel,
-  Stepper,
-  Typography,
-} from '@mui/material'
-import { getDateDelta } from './datetime'
-import SureThing from './SureThing'
-import Talka from './Talka'
-import Tecnico from './Tecnico'
+import moment from 'moment';
+import Image from 'next/image';
+import { FC, ReactNode } from 'react';
+import { Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import { getDateDelta } from './datetime';
+import SureThing from './SureThing';
+import Talka from './Talka';
+import Tecnico from './Tecnico';
 
 export interface TimelineItem {
   icon: ReactNode
@@ -34,7 +28,7 @@ const items: TimelineItem[] = [
     icon: <Icon src="/talka.png" />,
     title: (
       <Typography fontSize="large">
-        Senior Software Engineer @ Talka.ai
+        Founding Engineer @ Talka.ai
       </Typography>
     ),
     label: (
@@ -54,7 +48,7 @@ const items: TimelineItem[] = [
     icon: <Icon src="/sure_thing.png" />,
     title: (
       <Typography fontSize="large">
-        Software Engineer Intern @ SureThing
+        Software Engineer @ SureThing
       </Typography>
     ),
     label: (
