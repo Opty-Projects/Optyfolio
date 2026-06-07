@@ -1,51 +1,50 @@
+import NextLink from 'next/link'
 import { FC } from 'react'
 import { Link, Typography } from '@mui/material'
-import { TimelineItemCard, TimelineItemSection } from './styles'
+import { BulletList, TimelineItemCard, TimelineItemSection } from './styles'
 
 const Tecnico: FC = () => {
   return (
     <TimelineItemCard className="smoothStepIn">
       <TimelineItemSection>
         <Typography>
-          I studied Computer Science &amp; Engineering @{' '}
+          I studied Computer Science & Engineering @{' '}
           <Link
             href="https://tecnico.ulisboa.pt/"
             target="_blank"
             rel="noopener noreferrer"
-            underline="hover"
           >
             Instituto Superior Técnico
           </Link>{' '}
-          (Técnico Lisboa),{' '}
-          <Link
-            href="https://www.usnews.com/education/best-global-universities/portugal/computer-science"
-            target="_blank"
-            rel="noopener noreferrer"
-            underline="hover"
-          >
-            ranked
+          (Técnico Lisboa), ranked several times as the{' '}
+          <strong>best engineering university in Portugal</strong>.
+        </Typography>
+        <BulletList>
+          <Typography component="li">
+            Specialized in Distributed Systems & Cyber-Security and graduated
+            with a <strong>19/20 GPA</strong>.
+          </Typography>
+          <Typography component="li">
+            Earned a <strong>Merit/Excellence Diploma</strong> every year at
+            Técnico, plus a{' '}
+            <strong>University of Lisbon Merit Scholarship</strong> as the
+            best-performing student in my course in 2020/21.
+          </Typography>
+          <Typography component="li">
+            Taught <strong>Distributed Systems labs</strong> (3rd-year CS) and
+            built internal university tools as an <strong>R&D Scholar</strong>.
+          </Typography>
+        </BulletList>
+        <Typography color="textSecondary">
+          Details →{' '}
+          <Link component={NextLink} href="/bsc">
+            Bachelor’s
           </Link>{' '}
-          several times as the best engineering university in Portugal, where
-          I&apos;ve specialized in Distributed Systems &amp; Cyber-Security and
-          graduated with a 19/20 GPA.
-        </Typography>
-        <Typography>
-          My journey at Técnico was thankfully filled with academic successes.
-          Each year I was recognized with a Merit/Excellence Diploma for my
-          academic performance, and recently I was awarded an University of
-          Lisbon Merit Scholarship for being the best performing student of my
-          course in the academic year of 20/21.
-        </Typography>
-        <Typography>
-          During this period I got to teach lab classes of Distributed Systems
-          (3rd year course of the Computer Science Bachelor&apos;s Degree) as
-          Invited Teaching Assistant, and work on the development and
-          maintenance of app features to support IST Management as Research
-          Initiation Scholar @ Taguspark Computer Services Unit.
-        </Typography>
-        <Typography>
-          That said, the most important take away was the huge amount of
-          learning I acquired and friends I&apos;ve made for life.
+          ·{' '}
+          <Link component={NextLink} href="/msc">
+            Master’s
+          </Link>
+          .
         </Typography>
       </TimelineItemSection>
     </TimelineItemCard>

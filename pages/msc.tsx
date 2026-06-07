@@ -6,11 +6,11 @@ import { mscCourses } from '../data/courses'
 const MScPage: NextPage = () => (
   <>
     <Head>
-      <title>MSc - Optyfolio</title>
+      <title>Master’s — Ricardo Grade</title>
     </Head>
     <CoursesPage
       degree="Master's"
-      period="September 2020 - November 2022"
+      period="Sep 2020 - Nov 2022"
       courses={mscCourses}
     />
   </>

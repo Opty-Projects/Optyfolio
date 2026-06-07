@@ -1,7 +1,7 @@
 import { IconType } from 'react-icons'
-import { FaGlobe } from 'react-icons/fa'
+import { FaGlobe, FaLinkedin } from 'react-icons/fa'
 import { MdSchool, MdSummarize } from 'react-icons/md'
-import { SiGithub, SiLinkedin, SiUdemy } from 'react-icons/si'
+import { SiGithub, SiUdemy } from 'react-icons/si'
 
 export interface Link {
   href: string
@@ -35,7 +35,7 @@ export const certificates: Link[] = [
 export const socialNetworks: Link[] = [
   {
     href: 'https://www.linkedin.com/in/ricardograde/',
-    Icon: SiLinkedin,
+    Icon: FaLinkedin,
     tooltip: 'LinkedIn profile',
   },
   {

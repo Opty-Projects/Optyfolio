@@ -10,7 +10,10 @@ export interface AnimatedCharProps {
 const AnimatedChar: FC<AnimatedCharProps> = ({ char, index }) => {
   const animatedCharRef = useRef<HTMLSpanElement>(null)
 
-  const startAnimation = () => animatedCharRef.current?.classList.add('active')
+  const startAnimation = () => {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+    animatedCharRef.current?.classList.add('active')
+  }
   const stopAnimation = () =>
     animatedCharRef.current?.classList.remove('active')
 

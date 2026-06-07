@@ -1,7 +1,11 @@
 import { FC } from 'react'
-import { IconButton, Tooltip, Typography } from '@mui/material'
+import { Tooltip, Typography } from '@mui/material'
 import { Link } from '../../../data/links'
-import { FooterLinksContainer, FooterLinksGroup } from './styles'
+import {
+  FooterLinksContainer,
+  FooterLinksGroup,
+  SocialIconButton,
+} from './styles'
 
 export interface FooterLinksProps {
   title: string
@@ -10,18 +14,20 @@ export interface FooterLinksProps {
 
 const FooterLinks: FC<FooterLinksProps> = ({ title, links }) => (
   <FooterLinksGroup>
-    <Typography color="textSecondary">{title}</Typography>
+    <Typography variant="body2" color="textSecondary">
+      {title}
+    </Typography>
     <FooterLinksContainer>
       {links.map(({ href, Icon, tooltip }) => (
         <Tooltip key={href} title={tooltip}>
-          <IconButton
+          <SocialIconButton
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            color="primary"
+            size="small"
           >
             <Icon />
-          </IconButton>
+          </SocialIconButton>
         </Tooltip>
       ))}
     </FooterLinksContainer>

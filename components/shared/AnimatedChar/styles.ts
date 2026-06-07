@@ -1,9 +1,11 @@
 import { keyframes } from '@emotion/react'
-import { styled } from '@mui/system'
+import { styled } from '@mui/material/styles'
+import { displayFontFamily } from '../../../styles/fonts'
+import { easing } from '../../../styles/tokens'
 
 const fontSize = {
   sm: 35,
-  md: 70,
+  md: 68,
 }
 
 const squish = keyframes({
@@ -25,22 +27,21 @@ const squish = keyframes({
 })
 
 export const CharSpan = styled('span')(({ theme }) => ({
-  fontFamily: ['Solway', 'serif'].join(','),
-  fontWeight: 800,
+  fontFamily: displayFontFamily,
+  fontWeight: 700,
+  letterSpacing: '-0.03em',
   cursor: 'default',
-  fontSize: fontSize['md'],
+  fontSize: fontSize.md,
   [theme.breakpoints.down('sm')]: {
-    fontSize: fontSize['sm'],
+    fontSize: fontSize.sm,
   },
   color: theme.palette.text.primary,
+  transition: `color 0.2s ${easing.smooth}`,
   '&:hover': {
     color: theme.palette.primary.main,
   },
   '&.active': {
     display: 'block',
     animation: `${squish} 1s ease-in-out`,
-    [theme.breakpoints.down('sm')]: {
-      animation: `${squish} 1s ease-in-out`,
-    },
   },
 }))

@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { Link, Typography } from '@mui/material';
-import { TimelineItemCard, TimelineItemSection } from './styles';
+import { FC } from 'react'
+import { Link, Typography } from '@mui/material'
+import AnimatedNumber from '../../../shared/AnimatedNumber'
+import { BulletList, TimelineItemCard, TimelineItemSection } from './styles'
 
 const Talka: FC = () => {
   return (
@@ -11,46 +12,63 @@ const Talka: FC = () => {
             href="https://www.talka.ai/"
             target="_blank"
             rel="noopener noreferrer"
-            underline="hover"
           >
             Talka.ai
           </Link>{' '}
-          is a Conversational AI startup headquartered in Silicon Valley, where
-          I work, side-by-side with ex-Google AI researchers, on the full-stack
-          development of AI-driven apps designed to provide sales reps and their
-          managers with insights extracted from their sales meetings.
+          — SF conversational-AI startup turning sales calls into insights teams
+          act on.
         </Typography>
         <Typography>
-          <u>As a founding engineer in Talka</u>:
-          <ul>
-            <li>
-              I designed and built from scratch the Frontend of our React apps and
-              am now responsible for maintaining and extending it with new
-              features.
-            </li>
-            <li>
-              I created, extended and am responsible for multiple core Python
-              microservices supporting our apps.
-            </li>
-            <li>
-              I built a Zoom bot to record our customers&apos; sales meetings and
-              an app within the Zoom client to display real-time insights.
-            </li>
-            <li>
-              I created several automated tests and metrics to monitor the quality
-              of our system and ensure its requirements are met.
-            </li>
-            <li>
-              I fine-tuned 2 Bert and 2 Llama models (e.g., sales meeting
-              participant roles classifier; deal success predictor).
-            </li>
-            <li>
-              I am responsible for containerizing, configuring, deploying and
-              maintaining multiple services in GCP.
-            </li>
-            <li>I mentor new developers joining the team.</li>
-          </ul>
+          During my time: <AnimatedNumber value={60} suffix="k+" /> hours
+          analyzed across <AnimatedNumber value={30} suffix="+" /> behavioral
+          signals, for <AnimatedNumber value={600} suffix="+" /> reps and
+          managers across <AnimatedNumber value={20} suffix="+" /> companies.
         </Typography>
+        <Typography>
+          As a <strong>founding engineer</strong> — 1st full-stack hire on a
+          Google/Meta/DeepMind ML team — I built and owned much of the product
+          end-to-end:
+        </Typography>
+        <BulletList>
+          <Typography component="li">
+            <strong>Voice AI agents</strong> reps talk to — including a coaching
+            simulator that role-plays a prospect, fires back real objections,
+            and scores the rep.
+          </Typography>
+          <Typography component="li">
+            <strong>Reports that build themselves</strong> — an agent interprets
+            a user’s question, pulls and reasons over the data, and assembles
+            the answer into a custom React page.
+          </Typography>
+          <Typography component="li">
+            <strong>A Zoom bot</strong> that’s recorded{' '}
+            <AnimatedNumber value={6} suffix="k+" /> sales meetings, plus an
+            in-Zoom app surfacing insights in real time.
+          </Typography>
+          <Typography component="li">
+            <strong>The React web app</strong> — built from scratch, owned ever
+            since.
+          </Typography>
+          <Typography component="li">
+            <strong>10+ core Python microservices</strong> — built, extended,
+            and owned.
+          </Typography>
+          <Typography component="li">
+            <strong>Integrations</strong> across customers’ stack — CRM,
+            calendar, messaging, and more.
+          </Typography>
+          <Typography component="li">
+            <strong>The full GCP footprint</strong> — containerized, deployed,
+            maintained.
+          </Typography>
+          <Typography component="li">
+            <strong>Automated tests and quality metrics</strong> that catch
+            regressions in production before customers do.
+          </Typography>
+          <Typography component="li">
+            <strong>Mentored engineers</strong> as they joined the team.
+          </Typography>
+        </BulletList>
       </TimelineItemSection>
     </TimelineItemCard>
   )
