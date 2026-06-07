@@ -188,3 +188,6 @@ dist
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,nextjs
+
+# Claude Code — share the project config, keep personal local overrides out
+.claude/settings.local.json
