@@ -38,7 +38,7 @@ const LogoImg: FC<{ src: string; alt: string }> = ({ src, alt }) => (
 
 const entries: TimelineEntry[] = [
   {
-    logo: <LogoImg src="/bounce-icon.png" alt="Bounce" />,
+    logo: <LogoImg src="/bounce.png" alt="Bounce" />,
     role: 'Product Engineer',
     company: 'Bounce',
     companyUrl: 'https://bounce.com/',
