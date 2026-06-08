@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Optyfolio-Logo" src="./public/portfolio.png" width="100" />
+  <img alt="Ricardo Grade" src="./public/favicon.svg" width="96" />
 </div>
 <h1 align="center">
   Optyfolio (Opty + Portfolio)

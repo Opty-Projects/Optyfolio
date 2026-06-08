@@ -72,7 +72,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>Ricardo Grade — Product Engineer</title>
-        <link rel="icon" href="/portfolio.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content={description} />
         <meta name="author" content="Ricardo Grade" />
@@ -85,7 +85,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
         <meta
           property="og:image"
-          content="https://optyfolio-rgrade.vercel.app/portfolio.png"
+          content="https://optyfolio-rgrade.vercel.app/avatar.jpg"
         />
         <meta property="og:description" content={description} />
         <meta
