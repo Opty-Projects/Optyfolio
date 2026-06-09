@@ -1,15 +1,10 @@
 import { keyframes } from '@emotion/react'
-import { styled } from '@mui/system'
+import { styled } from '@mui/material/styles'
+import { easing, glass, glassHover } from '../../../styles/tokens'
 
 const smoothStepIn = keyframes({
-  '0%': {
-    opacity: 0,
-    transform: 'translateY(50%)',
-  },
-  '100%': {
-    opacity: 1,
-    transform: 'translateY(0)',
-  },
+  '0%': { opacity: 0, transform: 'translateY(24px) scale(0.985)' },
+  '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
 })
 
 export const CardContainer = styled('div')(({ theme }) => ({
@@ -18,25 +13,21 @@ export const CardContainer = styled('div')(({ theme }) => ({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  backgroundColor: theme.palette.background.paper,
-  WebkitBoxShadow: `0px 4px 8px -2px ${theme.palette.divider}`,
-  MozBoxShadow: `0px 4px 8px -2px ${theme.palette.divider}`,
-  boxShadow: `0px 4px 8px -2px ${theme.palette.divider}`,
-  padding: theme.spacing(2),
   gap: theme.spacing(1),
-  borderRadius: 4,
-  border: `1px solid ${theme.palette.divider}`,
-  '&:hover': {
-    WebkitBoxShadow: `0px 4px 8px -2px ${theme.palette.primary.main}44`,
-    MozBoxShadow: `0px 4px 8px -2px ${theme.palette.primary.main}44`,
-    boxShadow: `0px 4px 8px -2px ${theme.palette.primary.main}44`,
-    transition: 'all 0.3s ease-in-out',
-  },
-  '&.smoothStepIn': {
-    opacity: 0,
-  },
+  padding: theme.spacing(2.5),
+  borderRadius: theme.shape.borderRadius,
+  ...glass(theme),
+  transition: `transform 0.4s ${easing.spring}, box-shadow 0.4s ${easing.smooth}, border-color 0.4s ${easing.smooth}`,
+  '&:hover': glassHover(theme),
+  // Scroll-reveal — hidden until the IntersectionObserver adds `.active`.
+  '&.smoothStepIn': { opacity: 0 },
   '&.smoothStepIn.active': {
     opacity: 1,
-    animation: `${smoothStepIn} 1s ease`,
+    animation: `${smoothStepIn} 0.7s ${easing.spring} both`,
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    transition: 'none',
+    '&.smoothStepIn, &.smoothStepIn.active': { opacity: 1, animation: 'none' },
+    '&:hover': { transform: 'none' },
   },
 }))

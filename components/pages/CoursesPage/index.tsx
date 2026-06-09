@@ -1,32 +1,40 @@
-import { groupBy, isEmpty } from 'lodash'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { FC, useMemo } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import {
   ArrowDownward,
   ArrowUpward,
   CalendarToday,
   Category,
   MilitaryTech,
+  SearchRounded,
 } from '@mui/icons-material'
 import {
+  Box,
   capitalize,
   Grid,
   IconButton,
+  InputAdornment,
   Link,
+  TextField,
   Tooltip,
   Typography,
   useTheme,
 } from '@mui/material'
 import { Course } from '../../../data/courses'
+import { warmGradientStrong } from '../../../styles/tokens'
 import { getCoursesWeightedAvg } from '../../../utils/courses'
+import { groupBy } from '../../../utils/groupBy'
+import observeSmoothStepInElements from '../../../utils/smoothStepIn'
 import Card from '../../shared/Card'
+import GradientText from '../../shared/GradientText'
 import {
   CourseLinksContainer,
   CourseScoreContainer,
   CourseSection,
   GroupButton,
   GroupButtonContent,
+  GroupHeader,
 } from './styles'
 
 export interface CoursesPageProps {
@@ -35,118 +43,203 @@ export interface CoursesPageProps {
   courses: Course[]
 }
 
-const groupings = ['period', 'branch', 'score']
+const groupings = ['period', 'branch', 'score'] as const
+type Grouping = (typeof groupings)[number]
 const toggleSort = (sort: 'asc' | 'desc') => (sort === 'asc' ? 'desc' : 'asc')
 
 interface RouterQuery {
-  grouping?: (typeof groupings)[number]
+  grouping?: Grouping
   sort?: 'asc' | 'desc'
 }
 
 const groupingIcons = {
-  period: <CalendarToday />,
-  branch: <Category />,
-  score: <MilitaryTech />,
+  period: <CalendarToday fontSize="small" />,
+  branch: <Category fontSize="small" />,
+  score: <MilitaryTech fontSize="small" />,
 }
 
 const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
   const theme = useTheme()
   const router = useRouter()
-  const { grouping = 'period', sort = 'desc' } = router.query as RouterQuery
+  const { grouping: rawGrouping, sort: rawSort } = router.query as RouterQuery
+  // Validate URL params so a crafted ?grouping=foo can't break grouping.
+  const grouping: Grouping = groupings.includes(rawGrouping as Grouping)
+    ? (rawGrouping as Grouping)
+    : 'period'
+  const sort: 'asc' | 'desc' = rawSort === 'asc' ? 'asc' : 'desc'
   const sortTooltip = `Sort ${toggleSort(sort)}ending`
-  const sortArrow = sort === 'desc' ? <ArrowDownward /> : <ArrowUpward />
+  const sortArrow =
+    sort === 'desc' ? (
+      <ArrowDownward fontSize="small" />
+    ) : (
+      <ArrowUpward fontSize="small" />
+    )
+
+  const [search, setSearch] = useState('')
 
   const coursesWeightedAvg = useMemo(
     () => getCoursesWeightedAvg(courses),
-    [courses]
+    [courses],
   )
+  const filteredCourses = useMemo(() => {
+    const query = search.trim().toLowerCase()
+    if (!query) return courses
+    return courses.filter(
+      ({ name, branch }) =>
+        name.toLowerCase().includes(query) ||
+        branch.toLowerCase().includes(query),
+    )
+  }, [courses, search])
   const groupedCourses = useMemo(
     () =>
-      Object.entries(groupBy(courses, grouping)).sort(([a], [b]) =>
-        sort === 'asc' ? a.localeCompare(b) : b.localeCompare(a)
+      Object.entries(groupBy(filteredCourses, grouping)).sort(([a], [b]) =>
+        sort === 'asc' ? a.localeCompare(b) : b.localeCompare(a),
       ),
-    [courses, grouping, sort]
+    [filteredCourses, grouping, sort],
   )
+
+  // Re-observe on list change so cards re-added when clearing search aren't stuck hidden.
+  useEffect(observeSmoothStepInElements, [groupedCourses])
 
   return (
     <>
       <Card>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={8}>
-            <Typography>
-              Bologna {degree} Degree in Computer Science &amp; Engineering @{' '}
+        <Grid
+          container
+          spacing={2}
+          sx={{ width: '100%', alignItems: 'center' }}
+        >
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Typography variant="h6">
+              Bologna {degree} Degree in Computer Science & Engineering
+            </Typography>
+            <Typography color="textSecondary">
               <Link
                 href="https://tecnico.ulisboa.pt/"
                 target="_blank"
                 rel="noopener noreferrer"
-                underline="hover"
               >
                 Instituto Superior Técnico
-              </Link>
-            </Typography>
-            <Typography fontSize="small" color="textSecondary">
-              {period}
+              </Link>{' '}
+              · {period}
             </Typography>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <CourseScoreContainer>
-              <Typography fontSize="large" fontWeight={600}>
+              <GradientText
+                sx={{ fontSize: '2.4rem', fontWeight: 700, lineHeight: 1 }}
+              >
                 {coursesWeightedAvg.toFixed(1)}
-              </Typography>
-              <Typography fontSize="small" color="textSecondary">
-                GPA
+              </GradientText>
+              <Typography variant="body2" color="textSecondary">
+                GPA · out of 20
               </Typography>
             </CourseScoreContainer>
           </Grid>
         </Grid>
       </Card>
-      <CourseSection>
-        <Typography color="textSecondary">Group by:</Typography>
-        <GroupButtonContent>
-          {groupings.map((group) => (
-            <Tooltip
-              key={`group-${group}`}
-              title={grouping === group ? sortTooltip : `Group by ${group}`}
-            >
-              <GroupButton
-                value={group}
-                color={grouping === group ? 'primary' : 'default'}
-                onClick={() =>
-                  router.replace({
-                    query: {
-                      grouping: group,
-                      sort: grouping === group ? toggleSort(sort) : sort,
-                    },
-                  })
-                }
-                sx={{
-                  borderColor: grouping === group ? 'primary.main' : 'divider',
-                }}
-              >
-                <GroupButtonContent>
-                  {groupingIcons[group as keyof typeof groupingIcons]}
-                  {grouping === group && sortArrow}
-                </GroupButtonContent>
-              </GroupButton>
-            </Tooltip>
-          ))}
-        </GroupButtonContent>
-      </CourseSection>
-      {groupedCourses?.map(([group, courses]) => (
-        <Grid key={`courses-${grouping}-${group}`} container spacing={2}>
-          <Grid item xs={12}>
-            <CourseSection>
-              <Typography color="textSecondary">
-                {capitalize(grouping)}:
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 2,
+          width: '100%',
+        }}
+      >
+        <TextField
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Search courses…"
+          size="small"
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchRounded fontSize="small" />
+                </InputAdornment>
+              ),
+            },
+          }}
+          sx={{
+            flex: 1,
+            minWidth: 200,
+            maxWidth: 360,
+            '& .MuiOutlinedInput-root': { borderRadius: 999 },
+          }}
+        />
+        <CourseSection>
+          <Typography color="textSecondary">Group by</Typography>
+          <GroupButtonContent>
+            {groupings.map((group) => {
+              const active = grouping === group
+              return (
+                <Tooltip
+                  key={`group-${group}`}
+                  title={active ? sortTooltip : `Group by ${group}`}
+                >
+                  <GroupButton
+                    value={group}
+                    aria-label={active ? sortTooltip : `Group by ${group}`}
+                    onClick={() =>
+                      router.replace({
+                        query: {
+                          grouping: group,
+                          sort: active ? toggleSort(sort) : sort,
+                        },
+                      })
+                    }
+                    sx={{
+                      color: active ? '#fff' : 'text.secondary',
+                      borderColor: active ? 'transparent' : 'divider',
+                      backgroundImage: active ? warmGradientStrong : 'none',
+                      '&:hover': {
+                        backgroundImage: active ? warmGradientStrong : 'none',
+                        borderColor: active ? 'transparent' : 'primary.main',
+                      },
+                    }}
+                  >
+                    <GroupButtonContent>
+                      {groupingIcons[group]}
+                      {active && sortArrow}
+                    </GroupButtonContent>
+                  </GroupButton>
+                </Tooltip>
+              )
+            })}
+          </GroupButtonContent>
+        </CourseSection>
+      </Box>
+
+      {groupedCourses.length === 0 && (
+        <Typography color="textSecondary" sx={{ textAlign: 'center', py: 4 }}>
+          No courses match “{search}”.
+        </Typography>
+      )}
+
+      {groupedCourses.map(([group, groupCourses]) => (
+        <Grid
+          key={`courses-${grouping}-${group}`}
+          container
+          spacing={2}
+          sx={{ width: '100%' }}
+        >
+          <Grid size={12}>
+            <GroupHeader>
+              {groupingIcons[grouping]}
+              <Typography variant="body2" color="textSecondary">
+                {capitalize(grouping)}
               </Typography>
-              <Typography>{group}</Typography>
-            </CourseSection>
+              <Typography sx={{ fontWeight: 600 }}>{group}</Typography>
+            </GroupHeader>
           </Grid>
-          {courses.map(({ name, href, score, period, links, branch }) => (
-            <Grid key={`${grouping}-${group}-${name}`} item xs={12} md={6}>
+          {groupCourses.map(({ name, href, score, period, links, branch }) => (
+            <Grid key={`${grouping}-${group}-${name}`} size={{ xs: 12, md: 6 }}>
               <Card>
                 <div>
-                  <Link href={href} target="_blank" underline="hover">
+                  <Link href={href} target="_blank" rel="noopener noreferrer">
                     {name}
                   </Link>
                   {grouping !== 'period' && (
@@ -154,7 +247,7 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                       <CalendarToday
                         sx={{ fontSize: 'medium', color: 'text.secondary' }}
                       />
-                      <Typography fontSize="small" color="textSecondary">
+                      <Typography variant="body2" color="textSecondary">
                         {period}
                       </Typography>
                     </CourseSection>
@@ -164,14 +257,14 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                       <Category
                         sx={{ fontSize: 'medium', color: 'text.secondary' }}
                       />
-                      <Typography fontSize="small" color="textSecondary">
+                      <Typography variant="body2" color="textSecondary">
                         {branch}
                       </Typography>
                     </CourseSection>
                   )}
                 </div>
                 <CourseSection>
-                  {links && !isEmpty(links) && (
+                  {links && links.length > 0 && (
                     <CourseLinksContainer>
                       {links.map(({ href, Icon, color, tooltip }) => (
                         <Tooltip
@@ -182,13 +275,14 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            size="small"
                           >
                             {typeof Icon === 'string' ? (
                               <Image
                                 src={Icon}
-                                alt="icon"
-                                width={32}
-                                height={32}
+                                alt={tooltip}
+                                width={28}
+                                height={28}
                                 style={{ objectFit: 'contain' }}
                               />
                             ) : (
@@ -202,17 +296,18 @@ const CoursesPage: FC<CoursesPageProps> = ({ degree, period, courses }) => {
                     </CourseLinksContainer>
                   )}
                   <CourseScoreContainer>
-                    <Typography fontSize="large" fontWeight={600}>
+                    <GradientText
+                      sx={{
+                        fontSize: '1.5rem',
+                        fontWeight: 700,
+                        lineHeight: 1,
+                      }}
+                    >
                       {score}
+                    </GradientText>
+                    <Typography variant="body2" color="textSecondary">
+                      Score
                     </Typography>
-                    <CourseSection>
-                      <MilitaryTech
-                        sx={{ fontSize: 'medium', color: 'text.secondary' }}
-                      />
-                      <Typography fontSize="small" color="textSecondary">
-                        Score
-                      </Typography>
-                    </CourseSection>
                   </CourseScoreContainer>
                 </CourseSection>
               </Card>

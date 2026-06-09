@@ -7,7 +7,7 @@ export const getCoursesWeightedAvg = (courseList: Course[]) => {
       acc[1] += credits
       return acc
     },
-    [0, 0]
+    [0, 0],
   )
   return sum / credits
 }

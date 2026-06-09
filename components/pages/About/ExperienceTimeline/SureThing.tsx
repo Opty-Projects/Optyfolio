@@ -1,62 +1,71 @@
-import Image from 'next/image';
-import { FC } from 'react';
-import { Grid, Link, Typography } from '@mui/material';
-import { AboutAvatar } from '../styles';
-import { TimelineItemCard, TimelineItemSection } from './styles';
+import Image from 'next/image'
+import { FC } from 'react'
+import { Link, Typography } from '@mui/material'
+import {
+  BulletList,
+  MediaSide,
+  MediaThumb,
+  TimelineItemCard,
+  TimelineItemSection,
+} from './styles'
 
 const SureThing: FC = () => {
   return (
     <TimelineItemCard className="smoothStepIn">
-      <Grid container spacing={4} alignItems="center">
-        <Grid item xs={12} md={8}>
-          <TimelineItemSection>
-            <Typography>
-              <Link
-                href="https://surething.tecnico.ulisboa.pt/"
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-              >
-                SureThing
-              </Link>
-              &apos;s mission is to address today&apos;s security need in IoT.
-              <ul>
-                <li>
-                  I designed and integrated a peer-based location certification
-                  strategy into a smart tourism Android app, which leverages the
-                  moments when user devices see each other via Bluetooth.
-                </li>
-                <li>I developed gamification features into the app.</li>
-              </ul>
-            </Typography>
-          </TimelineItemSection>
-        </Grid>
-        <Grid item xs>
-          <TimelineItemSection
-            sx={{ flexDirection: 'row', alignItems: 'center' }}
+      <TimelineItemSection sx={{ flex: 1, minWidth: 260 }}>
+        <Typography>
+          <Link
+            href="https://surething.tecnico.ulisboa.pt/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <AboutAvatar>
-              <Image
-                src="/master.jpg"
-                alt="master"
-                fill
-                sizes="100vw"
-                style={{ objectFit: 'cover' }}
-              />
-            </AboutAvatar>
-            <Typography textAlign="center" whiteSpace="pre-line">
-              <Link
-                href="https://youtu.be/g6Qp26nNgQk"
-                target="_blank"
-                underline="hover"
-              >
-                CROSS City Mobile Application:{'\n'}
-                Gamified Peer-Based Location Certification
-              </Link>
-            </Typography>
-          </TimelineItemSection>
-        </Grid>
-      </Grid>
+            SureThing
+          </Link>{' '}
+          — proving a device is really where it claims to be.
+        </Typography>
+        <BulletList>
+          <Typography component="li">
+            Built a <strong>peer-to-peer Bluetooth location-proof</strong>{' '}
+            strategy for <strong>CROSS City</strong>, a gamified smart-tourism
+            Android app — nearby phones endorse each other’s location.
+            <br />
+            Collusion-resistant, tested with real users.
+          </Typography>
+        </BulletList>
+        <Typography color="textSecondary">
+          Published at{' '}
+          <Link
+            href="https://ieeexplore.ieee.org/document/10013607"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            IEEE NCA 2022
+          </Link>
+          .
+        </Typography>
+      </TimelineItemSection>
+      <MediaSide>
+        <MediaThumb
+          href="https://youtu.be/g6Qp26nNgQk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src="/master.jpg"
+            alt="CROSS City demo"
+            fill
+            sizes="124px"
+            style={{ objectFit: 'cover' }}
+          />
+        </MediaThumb>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{ textAlign: 'center' }}
+        >
+          CROSS City demo
+        </Typography>
+      </MediaSide>
     </TimelineItemCard>
   )
 }

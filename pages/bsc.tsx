@@ -6,11 +6,11 @@ import { bscCourses } from '../data/courses'
 const BScPage: NextPage = () => (
   <>
     <Head>
-      <title>BSc - Optyfolio</title>
+      <title>Bachelor’s — Ricardo Grade</title>
     </Head>
     <CoursesPage
       degree="Bachelor's"
-      period="September 2017 - June 2020"
+      period="Sep 2017 - Jun 2020"
       courses={bscCourses}
     />
   </>

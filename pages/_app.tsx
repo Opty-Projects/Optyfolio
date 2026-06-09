@@ -1,92 +1,106 @@
-// Official example:
-// https://github.com/mui/material-ui/blob/master/examples/nextjs-with-typescript/pages/_app.tsx
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
-import { CacheProvider, EmotionCache } from '@emotion/react'
+import {
+  createContext,
+  useCallback,
+  useMemo,
+  useSyncExternalStore,
+} from 'react'
 import { CssBaseline, PaletteMode } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Analytics } from '@vercel/analytics/react'
 import Page from '../components/layout/Page'
-import MessagingAction from '../components/messaging/MessagingAction'
 import getDesignTokens from '../styles/getDesignTokens'
-import createEmotionCache from '../utils/createEmotionCache'
-
-export interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache
-}
 
 export const PaletteModeContext = createContext<{
   togglePaletteMode: () => void
 }>({ togglePaletteMode: () => null })
 
-const clientSideEmotionCache = createEmotionCache()
-const localStorage = typeof window !== 'undefined' ? window.localStorage : null
-const description = `Ricardo is a Software Engineer passionate about building scalable and reliable applications that provide a good user experience.
-He places a strong emphasis on the quality and cleanliness of his code.
-In his free time, he enjoys watching TV series, playing video games, socializing with friends, and staying up to date with the latest frameworks and technologies to improve his skills as a developer.`
-const MyApp = ({
-  Component,
-  pageProps,
-  emotionCache = clientSideEmotionCache,
-}: MyAppProps) => {
-  const [paletteMode, setPaletteMode] = useState(
-    (localStorage?.getItem('paletteMode') || 'dark') as PaletteMode
+const description =
+  'Ricardo Grade — a Product Engineer shaping and bringing ideas to life. ' +
+  'Founding-engineer experience taking products and features 0→1 and owning them end-to-end.'
+
+// localStorage-backed palette mode via useSyncExternalStore — SSR-safe, syncs across tabs.
+const STORAGE_KEY = 'paletteMode'
+const isMode = (value: string | null): value is PaletteMode =>
+  value === 'light' || value === 'dark'
+
+const getSnapshot = (): PaletteMode => {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY)
+    return isMode(stored) ? stored : 'dark'
+  } catch {
+    return 'dark'
+  }
+}
+const getServerSnapshot = (): PaletteMode => 'dark'
+
+const listeners = new Set<() => void>()
+const subscribe = (onStoreChange: () => void) => {
+  listeners.add(onStoreChange)
+  window.addEventListener('storage', onStoreChange)
+  return () => {
+    listeners.delete(onStoreChange)
+    window.removeEventListener('storage', onStoreChange)
+  }
+}
+const setStoredMode = (mode: PaletteMode) => {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, mode)
+  } catch {
+    // Ignore — storage may be unavailable (private mode, etc.).
+  }
+  listeners.forEach((listener) => listener())
+}
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const paletteMode = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
   )
   const togglePaletteMode = useCallback(
-    () =>
-      setPaletteMode((prev) => {
-        const paletteMode = prev === 'dark' ? 'light' : 'dark'
-        localStorage?.setItem('paletteMode', paletteMode)
-        return paletteMode
-      }),
-    []
+    () => setStoredMode(paletteMode === 'dark' ? 'light' : 'dark'),
+    [paletteMode],
   )
   const theme = useMemo(
     () => createTheme(getDesignTokens(paletteMode)),
-    [paletteMode]
+    [paletteMode],
   )
-
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null // Prevents the page from flashing
 
   return (
     <>
       <Head>
-        <title>Optyfolio</title>
-        <link rel="icon" href="/portfolio.png" />
-        <meta name="title" property="og:title" content="Optyfolio" />
-        <meta name="type" property="og:type" content="Portfolio" />
-        <meta
-          name="url"
-          property="og:url"
-          content="https://ricardograde.dev/"
-        />
-        <meta
-          name="image"
-          property="og:image"
-          content="https://ricardograde.dev/portfolio.png"
-        />
-        <meta
-          name="description"
-          property="og:description"
-          content={description}
-        />
-        <meta name="author" property="og:author" content="Ricardo Grade" />
+        <title>Ricardo Grade — Product Engineer</title>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content={description} />
+        <meta name="author" content="Ricardo Grade" />
+        <meta property="og:title" content="Ricardo Grade — Product Engineer" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Optyfolio" />
+        <meta
+          property="og:url"
+          content="https://optyfolio-rgrade.vercel.app/"
+        />
+        <meta
+          property="og:image"
+          content="https://optyfolio-rgrade.vercel.app/avatar.jpg"
+        />
+        <meta property="og:description" content={description} />
+        <meta
+          name="theme-color"
+          content={paletteMode === 'dark' ? '#0b0a08' : '#faf7f2'}
+        />
       </Head>
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <PaletteModeContext.Provider value={{ togglePaletteMode }}>
-            <Page>
-              <Component {...pageProps} />
-            </Page>
-            <MessagingAction />
-          </PaletteModeContext.Provider>
-        </ThemeProvider>
-      </CacheProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <PaletteModeContext.Provider value={{ togglePaletteMode }}>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </PaletteModeContext.Provider>
+      </ThemeProvider>
       <Analytics />
     </>
   )
